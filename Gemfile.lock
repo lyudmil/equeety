@@ -30,6 +30,8 @@ GEM
     activesupport (3.0.0.rc)
     arel (0.4.0)
       activesupport (>= 3.0.0.beta)
+    authlogic (2.1.5)
+      activesupport
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -69,5 +71,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authlogic
   rails (= 3.0.0.rc)
   sqlite3-ruby (= 1.2.5)
