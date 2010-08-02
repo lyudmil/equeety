@@ -1,6 +1,13 @@
 Equeety::Application.routes.draw do
-  resources :users
+  get "static_pages/home"
 
+  resources :users do
+    member do
+      get :new
+      post :create
+    end
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
