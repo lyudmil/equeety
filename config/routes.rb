@@ -1,4 +1,10 @@
 Equeety::Application.routes.draw do
+  get "user_session/new"
+
+  get "user_session/create"
+
+  get "user_session/destroy"
+
   get "static_pages/home"
 
   resources :users do
