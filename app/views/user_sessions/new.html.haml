@@ -1,0 +1,12 @@
+%h1 Log in
+- form_tag :controller => 'user_sessions', :action => 'create' do
+  .field
+    %label{:for => "email"} Email
+    %br/
+    %input#email{:name => "session[email]", :type => "text"}/
+  .field
+    %label{:for => "password"} Password
+    %br/
+    %input#password{:name => "session[password]", :type => "password"}/
+  .actions
+    %input{:type => "submit", :value => "Log in"}/

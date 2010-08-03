@@ -1,0 +1,48 @@
+= form_for @deal do |f|
+  - if @deal.errors.any?
+    #error_explanation
+      %ul
+        - @deal.errors.full_messages.each do |msg|
+          %li= msg
+  
+  .field
+    = f.label :startup_name
+    %br/
+    = f.text_field :startup_name
+  .field
+    = f.label :website
+    %br/
+    = f.text_field :website
+  .field
+    = f.label :contact_name
+    %br/
+    = f.text_field :contact_name
+  .field
+    = f.label :contact_email
+    %br/
+    = f.text_field :contact_email
+  .field
+    = f.label :logo_url
+    %br/
+    = f.text_field :logo_url
+  .field
+    = f.label :required_amount
+    %br/
+    = f.text_field :required_amount
+  .field
+    = f.label :proposed_valuation
+    %br/
+    = f.text_field :proposed_valuation
+  .field
+    = f.label :closing_date
+    %br/
+    = f.date_select :closing_date, :order => [:day, :month, :year], :include_blank => true, :default => {}
+  .field
+    = f.label :round
+    %br/
+    = f.select :round, round_options
+  
+  .actions
+    = f.submit :value => 'Create deal'
+
+= link_to "Back to deals", deals_url
