@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
     @session = UserSession.new(params[:session])
     
     if @session.save
-      redirect_to home_url
+      redirect_to home_url, :notice => 'You\'ve logged in successfully.'
     else
       render :action => 'new'
     end
