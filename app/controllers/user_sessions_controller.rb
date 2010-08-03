@@ -1,4 +1,4 @@
-class UserSessionController < ApplicationController
+class UserSessionsController < ApplicationController
   def new
     @session = UserSession.new
   end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UserSessionController do
+describe UserSessionsController do
 
   before :each do
     @session = mock('UserSession')
