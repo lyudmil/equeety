@@ -89,7 +89,7 @@ PLATFORMS
 
 DEPENDENCIES
   authlogic
-  rails (= 3.0.0.rc)
+  rails (~> 3.0.0.rc)
   rspec (= 2.0.0.beta.18)
   rspec-rails (= 2.0.0.beta.18)
   sqlite3-ruby (= 1.2.5)
