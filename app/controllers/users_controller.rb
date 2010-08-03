@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
-      redirect_to(:controller => "static_pages", :action => "home", :notice => 'User was successfully created.')
+      redirect_to home_url, :notice => 'You have signed up successfully.'
     else
       render :action => "new"
     end

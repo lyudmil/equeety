@@ -1,12 +1,11 @@
 Equeety::Application.routes.draw do
-  get "static_pages/home"
+  match 'home' => 'static_pages#home', :as => :home
 
-  get "user_sessions/new"
-  post "user_sessions/create"
-  get "user_sessions/destroy"
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
+  post 'user_sessions/create'
 
   resources :users
-  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

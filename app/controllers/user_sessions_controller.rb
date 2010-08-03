@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
     @session = UserSession.new(params[:session])
     
     if @session.save
-      redirect_to :controller => 'static_pages', :action => 'home'
+      redirect_to home_url
     else
       render :action => 'new'
     end
@@ -17,6 +17,6 @@ class UserSessionsController < ApplicationController
     @session = UserSession.find
     @session.destroy
     
-    redirect_to :controller => 'static_pages', :action => 'home'
+    redirect_to home_url
   end
 end
