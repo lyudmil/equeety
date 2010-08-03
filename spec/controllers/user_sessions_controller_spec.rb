@@ -42,7 +42,7 @@ describe UserSessionsController do
       @session.stub(:save).and_return(false)
       post 'create'
       
-      response.should render_template 'new'
+      response.should redirect_to :controller => 'user_sessions', :action => 'new'
     end
   end
 
@@ -54,11 +54,11 @@ describe UserSessionsController do
       get 'destroy'
     end
     
-    it "should redirect to the home page" do
+    it "should redirect to the root page" do
       @session.stub(:destroy)
       get 'destroy'
       
-      response.should redirect_to :controller => 'static_pages', :action => 'home'
+      response.should redirect_to root_url
     end
   end
 

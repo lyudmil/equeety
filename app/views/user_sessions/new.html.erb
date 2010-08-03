@@ -1,8 +1,14 @@
 <h1>Log in</h1>
 <%= form_tag :controller => 'user_sessions', :action => 'create' %>
-	<label for="email">Email</label><br />
-	<input id="email" type="text" name="session[email]"><br />
-	<label for="password">Password</label><br />
-	<input id="password" type="password" name="session[password]"><br />
-	<input type="submit" value="Log in">
+	<div class="field">
+		<label for="email">Email</label><br />
+		<input id="email" type="text" name="session[email]">
+	</div>
+	<div class="field">
+		<label for="password">Password</label><br />
+		<input id="password" type="password" name="session[password]">
+	</div>
+	<div class="actions">
+		<input type="submit" value="Log in">
+	</div>
 </form>

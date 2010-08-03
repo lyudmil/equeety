@@ -6,6 +6,8 @@ Equeety::Application.routes.draw do
   post 'user_sessions/create'
 
   resources :users
+  
+  root :to => 'static_pages#home'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
