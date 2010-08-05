@@ -16,7 +16,21 @@
 	    <%= f.label :contact_email %><br />
 	    <%= f.text_field :contact_email %>
 	</div>
+	<div class="field">
+	    <%= f.label :logo_url %><br />
+	    <%= f.text_field :logo_url %>
+	</div>
+	<div class="field">
+	    <%= f.label :required_amount %><br />
+	    <%= f.text_field :required_amount %>
+	</div>
+	<div class="field">
+	    <%= f.label :proposed_valuation %><br />
+	    <%= f.text_field :proposed_valuation %>
+	</div>
 	<div class="actions">
-	    <%= f.submit :value => 'Create deal'%>
+	    <%= f.submit :value => 'Create deal' %>
 	</div>
 <% end %>
+
+<!-- TODO :closing_date, :round -->
