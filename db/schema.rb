@@ -10,7 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100802141736) do
+ActiveRecord::Schema.define(:version => 20100805084040) do
+
+  create_table "deals", :force => true do |t|
+    t.string   "startup_name"
+    t.string   "website"
+    t.string   "contact_name"
+    t.string   "contact_email"
+    t.string   "logo_url"
+    t.decimal  "required_amount",    :precision => 10, :scale => 2
+    t.decimal  "proposed_valuation", :precision => 12, :scale => 2
+    t.datetime "closing_date"
+    t.string   "round"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
