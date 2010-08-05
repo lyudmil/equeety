@@ -44,6 +44,20 @@ describe Deal do
     validation_sanity_check
   end
   
+  it "should validate presence of startup name" do
+    assert_validates_presence_of :startup_name
+  end
+  
+  it "should validate presence of website" do
+    assert_validates_presence_of :website
+  end
+  
+  it "should validate presence of contact name" do
+    assert_validates_presence_of :contact_name
+  end
+  
+  private
+
   def assert_validates_numericality_of field
     deal = Deal.new(valid_fields.except(field))
     deal.should_not be_valid
@@ -60,6 +74,14 @@ describe Deal do
     validation_sanity_check
   end
   
+  def assert_validates_presence_of field
+    deal = Deal.new(valid_fields.except(field))
+    deal.should_not be_valid
+    deal.errors_on(field).should == ["can't be blank"]
+    
+    validation_sanity_check
+  end
+  
   def assert_validates_upper_bound_of field, upper_bound
     deal = Deal.new(valid_fields.except(field).merge({field => upper_bound}))
     deal.should_not be_valid
@@ -69,7 +91,14 @@ describe Deal do
   end
   
   def valid_fields
-    {:required_amount => 111, :proposed_valuation => 222, :contact_email => 'me@email.com'}
+    {
+      :required_amount => 111, 
+      :proposed_valuation => 222, 
+      :contact_email => 'me@email.com',
+      :startup_name => 'equeety',
+      :website => 'www.equeety.com',
+      :contact_name => 'John Doe'
+    }
   end
   
   def validation_sanity_check
