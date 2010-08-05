@@ -64,6 +64,41 @@ describe DealsController do
     end
   end
   
+  describe "edit" do
+    it "should find the deal to edit" do
+      deal = mock_model(Deal)
+      Deal.should_receive(:find).with(1).and_return(deal)
+      get 'edit', :id => 1
+      
+      assigns(:deal).should == deal
+    end
+  end
+  
+  describe "update" do
+    before do
+      @deal = mock_model(Deal)
+      Deal.should_receive(:find).with(23).and_return(@deal)
+    end
+    it "should update the deal based on the submitted parameters" do
+      @deal.should_receive(:update_attributes).with(deal_parameters)
+      put 'update', :id => 23, :deal => deal_parameters
+    end
+    
+    it "should redirect to index action if update successful" do
+      @deal.stub(:update_attributes).and_return(true)
+      put 'update', :id => 23
+      
+      response.should redirect_to :controller => 'deals', :action => 'index'
+    end
+    
+    it "should render the edit template if update unsuccessful" do
+      @deal.stub(:update_attributes).and_return(false)
+      put 'update', :id => 23
+      
+      response.should render_template 'edit'
+    end
+  end
+  
   private
   
   def deal_parameters

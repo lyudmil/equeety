@@ -14,6 +14,19 @@ class DealsController < ApplicationController
     end
   end
   
+  def edit
+    @deal = Deal.find(params[:id])
+  end
+  
+  def update
+    @deal = Deal.find(params[:id])
+    if @deal.update_attributes(params[:deal])
+      redirect_to deals_url
+    else
+      render :action => 'edit'
+    end
+  end
+  
   def index
     @deals = Deal.where(:user_id => current_user)
   end

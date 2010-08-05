@@ -15,6 +15,7 @@
 			<strong>Proposed valuation:</strong> <%= deal.proposed_valuation %> <br />
 			<strong>Closing date:</strong> <%= deal.closing_date %> <br />
 			<strong>Round:</strong> <%= deal.round %> <br />
+			<%= link_to "Edit", edit_deal_url(deal)%>
 		</li>
 	<% end %>
 	</ul>
