@@ -40,7 +40,7 @@
 	</div>
 	<div class="field">
 	    <%= f.label :closing_date %><br />
-	    <%= f.date_select :closing_date, :order => [:day, :month, :year] %>
+	    <%= f.date_select :closing_date, :order => [:day, :month, :year], :include_blank => true, :default => {} %>
 	</div>
 	<div class="field">
 	    <%= f.label :round %><br />
