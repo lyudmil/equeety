@@ -38,11 +38,17 @@
 	    <%= f.label :proposed_valuation %><br />
 	    <%= f.text_field :proposed_valuation %>
 	</div>
+	<div class="field">
+	    <%= f.label :closing_date %><br />
+	    <%= f.date_select :closing_date, :order => [:day, :month, :year] %>
+	</div>
+	<div class="field">
+	    <%= f.label :round %><br />
+	    <%= f.select :round, round_options %>
+	</div>
 	<div class="actions">
 	    <%= f.submit :value => 'Create deal' %>
 	</div>
 <% end %>
 
 <%= link_to "Back to deals", deals_url %>
-
-<!-- TODO :closing_date, :round -->

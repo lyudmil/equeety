@@ -1,19 +1,21 @@
 <h1>My Deals</h1>
 <div>
-<%= link_to "Add a new deal", new_deal_url %> <br />
+<%= link_to "Create a new deal", new_deal_url %> <br />
 </div>
 <div>
-<% for deal in @deals %>
-	<div>
-		<%= deal.startup_name %> <br />
-		<%= deal.website %> <br />
-		<%= deal.contact_name %> <br />
-		<%= deal.contact_email %> <br />
-		<%= deal.logo_url %> <br />
-		<%= deal.required_amount %> <br />
-		<%= deal.proposed_valuation %> <br />
-		<%= deal.closing_date %> <br />
-		<%= deal.round %> <br />
-	</div>
-<% end %>
+	<ul>
+	<% for deal in @deals %>
+		<li>
+			<strong>Startup name:</strong> <%= deal.startup_name %> <br />
+			<strong>Website:</strong> <%= deal.website %> <br />
+			<strong>Contact name:</strong> <%= deal.contact_name %> <br />
+			<strong>Contact email:</strong> <%= deal.contact_email %> <br />
+			<strong>Logo:</strong> <%= deal.logo_url %> <br />
+			<strong>Required amount:</strong> <%= deal.required_amount %> <br />
+			<strong>Proposed valuation:</strong> <%= deal.proposed_valuation %> <br />
+			<strong>Closing date:</strong> <%= deal.closing_date %> <br />
+			<strong>Round:</strong> <%= deal.round %> <br />
+		</li>
+	<% end %>
+	</ul>
 </div>
