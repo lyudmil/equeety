@@ -5,16 +5,17 @@ class DealsController < ApplicationController
 
   def create
     @deal = Deal.new(deal_parameters)
+    @deal.save
     redirect_to :action => 'index'
   end
   
   def index
-    @deals = current_user.deals
+    @deals = Deal.where(:user_id => current_user)
   end
   
   private
   
   def deal_parameters
-    params[:deal].merge({:owner => current_user})
+    params[:deal].merge({:user => current_user})
   end
 end

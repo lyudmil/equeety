@@ -1,2 +1,9 @@
-<h1>Deals#index</h1>
-<p>Find me in app/views/deals/index.html.erb</p>
+<h1>My Deals</h1>
+<% for deal in @deals %>
+	<div>
+		<%= deal.startup_name %> <br />
+		<%= deal.website %> <br />
+		<%= deal.contact_name %> <br />
+		<%= deal.contact_email %> <br />
+	</div>
+<% end %>

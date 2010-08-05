@@ -36,7 +36,7 @@ describe DealsController do
       }
       post 'create', {:deal => deal_parameters}
       
-      assigns(:deal).owner.should == @current_user
+      assigns(:deal).user.should == @current_user
       assigns(:deal).startup_name.should == 'equeety'
       assigns(:deal).website.should == 'equeety.com'
       assigns(:deal).contact_name.should == 'stefano'
@@ -44,18 +44,19 @@ describe DealsController do
   end
 
   describe "index" do
+    before do
+      @deals = [mock_model(Deal), mock_model(Deal)]
+      Deal.should_receive(:where).with(:user_id => @current_user).and_return(@deals)
+    end
+    
     it "should be successful" do
-      @current_user.stub(:deals)
       get 'index'
       response.should be_success
     end
     
     it "should find all deals owned by the current user" do
-      deals = [mock_model(Deal), mock_model(Deal)]
-      @current_user.should_receive(:deals).and_return(deals)
-      get 'index'
-      
-      assigns(:deals).should == deals
+      get 'index' 
+      assigns(:deals).should == @deals
     end
   end
 end
