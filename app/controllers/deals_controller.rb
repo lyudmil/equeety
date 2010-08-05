@@ -5,8 +5,11 @@ class DealsController < ApplicationController
 
   def create
     @deal = Deal.new(deal_parameters)
-    @deal.save
-    redirect_to :action => 'index'
+    if @deal.save
+      redirect_to :action => 'index'
+    else
+      render :action => 'new'
+    end
   end
   
   def index

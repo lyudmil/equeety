@@ -57,7 +57,9 @@ describe Deal do
   end
   
   private
-
+  # These should perhaps be in a helper? 
+  # I also tried installing remarkable_rails to replace this but it didn't work right away, so I held off
+  
   def assert_validates_numericality_of field
     deal = Deal.new(valid_fields.except(field))
     deal.should_not be_valid

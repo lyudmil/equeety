@@ -1,4 +1,8 @@
 <h1>My Deals</h1>
+<div>
+<%= link_to "Add a new deal", new_deal_url %> <br />
+</div>
+<div>
 <% for deal in @deals %>
 	<div>
 		<%= deal.startup_name %> <br />
@@ -12,3 +16,4 @@
 		<%= deal.round %> <br />
 	</div>
 <% end %>
+</div>

@@ -1,6 +1,4 @@
 Equeety::Application.routes.draw do
-  match 'home' => 'static_pages#home', :as => :home
-
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   post 'user_sessions/create'

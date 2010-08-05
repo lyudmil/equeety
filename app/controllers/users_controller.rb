@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
-      redirect_to home_url, :notice => 'You have signed up successfully.'
+      redirect_to deals_url, :notice => 'You have signed up successfully.'
     else
       render :action => "new"
     end

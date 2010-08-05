@@ -35,7 +35,7 @@ describe UserSessionsController do
       @session.stub(:save).and_return(true)   
       post 'create'
       
-      response.should redirect_to :controller => 'static_pages', :action => 'home'
+      response.should redirect_to :controller => 'deals', :action => 'index'
     end
     
     it "should render the login dialog if login unsuccessful" do
