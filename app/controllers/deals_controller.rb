@@ -1,4 +1,6 @@
 class DealsController < ApplicationController
+  before_filter :require_user
+  
   def new
     @deal = Deal.new
   end
