@@ -48,8 +48,33 @@ describe Deal do
     assert_validates_presence_of :startup_name
   end
   
-  it "should validate presence of website" do
-    assert_validates_presence_of :website
+  describe 'website' do
+    it "should be present" do
+      assert_validates_presence_of :website
+    end
+    
+    it 'should be an URL' do
+      deal = Deal.new(valid_fields)
+      deal.website.should =~ Deal::URL_FORMAT
+      deal.should be_valid
+      validation_sanity_check
+      
+      %w[ftp://some.random.string .asdf.few asdf@ciao].each do |bad_website|
+        deal = Deal.new(valid_fields)
+        bad_website.should_not =~ Deal::URL_FORMAT
+        deal.website = bad_website
+        deal.should_not be_valid
+        validation_sanity_check
+      end
+
+      %w[http://some.random.string https://some.random.string http://some.random.string/?ASdffa^EW$W=].each do |good_website|
+        deal = Deal.new(valid_fields)
+        good_website.should =~ Deal::URL_FORMAT
+        deal.website = good_website
+        deal.should be_valid
+        validation_sanity_check
+      end
+    end
   end
   
   it "should validate presence of contact name" do
