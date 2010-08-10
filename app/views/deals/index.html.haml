@@ -1,36 +1,25 @@
 %h1 My Deals
 %div
-  = link_to "Create a new deal", new_deal_url
-  %br/
+  = link_to "New deal", new_deal_url
 %div
   %ul
     - for deal in @deals
       %li
-        %strong Startup name:
-        = deal.startup_name
-        %br/
-        %strong Website:
-        = deal.website
-        %br/
-        %strong Contact name:
-        = deal.contact_name
-        %br/
-        %strong Contact email:
-        = deal.contact_email
-        %br/
-        %strong Logo:
-        = deal.logo_url
-        %br/
-        %strong Required amount:
-        = deal.required_amount
-        %br/
-        %strong Proposed valuation:
-        = deal.proposed_valuation
-        %br/
-        %strong Closing date:
-        = deal.closing_date
-        %br/
-        %strong Round:
-        = deal.round
-        %br/
+        .logo= image_tag(deal.logo_url) if deal.logo_url?
+        .name= link_to_if deal.website?, sanitize(deal.startup_name), sanitize(deal.website)
+        .contact
+          %strong Contact:
+          %span.name= mail_to deal.contact_name, deal.contact_email
+        .required_amount
+          %strong Required:
+          $#{deal.required_amount}
+        .proposed_valuation
+          %strong Proposed valuation:
+          $#{deal.proposed_valuation}
+        .closing_date
+          %strong Closing date:
+          = deal.closing_date? ? deal.closing_date : :none
+        .round
+          %strong Round:
+          = deal.round
         = link_to "Edit", edit_deal_url(deal)
