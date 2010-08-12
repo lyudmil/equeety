@@ -12,4 +12,21 @@ class UsersController < ApplicationController
       render :action => "new"
     end
   end
+  
+  def show
+    @user = current_user
+  end
+  
+  def budget
+    @user = current_user
+  end
+  
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      redirect_to deals_url
+    else
+      render :action => "budget"
+    end
+  end
 end

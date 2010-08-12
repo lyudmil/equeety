@@ -79,6 +79,7 @@ describe DealsController do
       @deal = mock_model(Deal)
       Deal.should_receive(:find).with(23).and_return(@deal)
     end
+    
     it "should update the deal based on the submitted parameters" do
       @deal.should_receive(:update_attributes).with(deal_parameters)
       put 'update', :id => 23, :deal => deal_parameters
