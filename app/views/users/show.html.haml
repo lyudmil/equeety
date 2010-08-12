@@ -1,0 +1,9 @@
+%h1 Profile
+%div
+  .email
+    %strong Email:
+    #{@user.email}
+  .budget
+    %strong Budget:
+    $#{@user.budget}
+  = link_to "Edit", budget_url

@@ -3,9 +3,9 @@ Equeety::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy', :as => :logout
   post 'user_sessions/create'
 
+  match 'users/budget' => 'users#budget', :as => :budget
+  match 'users/show' => 'users#show', :as => :profile
   resources :users do
-    get :show
-    get :budget
     put :update
   end
   
