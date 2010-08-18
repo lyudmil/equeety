@@ -5,15 +5,21 @@ describe UsersController do
     @user = mock_model(User)
     user_session = mock('UserSession')
     user_session.stub(:record).and_return(@user)
-    UserSession.should_receive(:find).and_return(user_session)
+    UserSession.stub(:find).and_return(user_session)
   end
   
   describe "new" do
-    it "should require the user to be logged out"
+    it "should require the user to be logged out" do
+      controller.should_receive(:require_no_user)
+      get "new"
+    end
   end
   
   describe "create" do
-    it "should require the user to be logged out"
+    it "should require the user to be logged out" do
+      controller.should_receive(:require_no_user)
+      post 'create'
+    end
   end
   
   describe "budget" do 
@@ -28,7 +34,12 @@ describe UsersController do
       assigns(:user).should == @user
     end
     
-    it "should require the user to be logged in"
+    it "should require the user to be logged in" do
+      controller.stub(:current_user).and_return(false)
+      get 'budget'
+      
+      response.should_not be_success
+    end
   end
   
   describe "update" do
@@ -59,7 +70,12 @@ describe UsersController do
       response.should render_template 'budget'
     end
     
-    it "should require the user to be logged in"
+    it "should require the user to be logged in" do
+      @user.stub(:update_attributes).and_return(true)
+      controller.should_receive(:require_user)
+      
+      put 'update', :user => {}
+    end
   end
   
   describe "show" do
@@ -73,7 +89,10 @@ describe UsersController do
       assigns(:user).should == @user
     end
     
-    it "should require the user to be logged in"
+    it "should require the user to be logged in" do
+      controller.should_receive(:require_user)
+      get 'show'
+    end
   end
   
   private
