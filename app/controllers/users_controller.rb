@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      redirect_to deals_url
+      redirect_to @user
     else
       render :action => "budget"
     end

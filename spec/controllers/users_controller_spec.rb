@@ -35,10 +35,8 @@ describe UsersController do
     end
     
     it "should require the user to be logged in" do
-      controller.stub(:current_user).and_return(false)
+      controller.should_receive(:require_user)
       get 'budget'
-      
-      response.should_not be_success
     end
   end
   
@@ -56,11 +54,11 @@ describe UsersController do
       put 'update', :user => user_parameters
     end
     
-    it "should redirect to deals page on successful update" do
+    it "should redirect to user profile page on successful update" do
       @user.stub(:update_attributes).and_return(true)
       put 'update', :user => {}
       
-      response.should redirect_to :controller => 'deals', :action => 'index'
+      response.should redirect_to @user
     end
     
     it "should render the budget template if update unsuccessful" do
