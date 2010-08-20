@@ -27,6 +27,10 @@ class DealsController < ApplicationController
     end
   end
   
+  def show
+    @deal = Deal.find(params[:id])
+  end
+  
   def index
     @deals = Deal.where(:user_id => current_user)
   end

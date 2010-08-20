@@ -1,0 +1,19 @@
+%h1 #{@deal.startup_name}
+.logo= image_tag(@deal.logo_url) if @deal.logo_url?
+.name= link_to_if @deal.website?, sanitize(@deal.startup_name), sanitize(@deal.website)
+.contact
+  %strong Contact:
+  %span.name= mail_to @deal.contact_name, @deal.contact_email
+.required_amount
+  %strong Required:
+  $#{@deal.required_amount}
+.proposed_valuation
+  %strong Proposed valuation:
+  $#{@deal.proposed_valuation}
+.closing_date
+  %strong Closing date:
+  = @deal.closing_date? ? @deal.closing_date : :none
+.round
+  %strong Round:
+  = @deal.round
+=link_to "Back", deals_url

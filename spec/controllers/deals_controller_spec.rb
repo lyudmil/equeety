@@ -100,6 +100,13 @@ describe DealsController do
     end
   end
   
+  describe "show" do
+    it "should find the right deal" do
+      Deal.should_receive(:find).with(34)
+      get 'show', :id => 34
+    end
+  end
+  
   private
   
   def deal_parameters
