@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'validation_test_helper'
 
-describe Deal do  
+describe Deal do
+  include ValidationTestHelper
+  
   it "should belong to a user" do
     user = mock_model('User')
     deal = Deal.new(:user => user)
@@ -90,39 +93,9 @@ describe Deal do
   end
   
   private
-  # These should perhaps be in a helper? 
-  # I also tried installing remarkable_rails to replace this but it didn't work right away, so I held off
   
-  def assert_validates_numericality_of field
-    deal = Deal.new(valid_fields.except(field))
-    deal.should_not be_valid
-    deal.errors_on(field).should == ["is not a number"]
-    
-    validation_sanity_check
-  end
-  
-  def assert_validates_positiveness_of field
-    deal = Deal.new(valid_fields.except(field).merge({field => 0}))
-    deal.should_not be_valid
-    deal.errors_on(field).should == ["must be greater than 0"]
-    
-    validation_sanity_check
-  end
-  
-  def assert_validates_presence_of field
-    deal = Deal.new(valid_fields.except(field))
-    deal.should_not be_valid
-    deal.errors_on(field).should == ["can't be blank"]
-    
-    validation_sanity_check
-  end
-  
-  def assert_validates_upper_bound_of field, upper_bound
-    deal = Deal.new(valid_fields.except(field).merge({field => upper_bound}))
-    deal.should_not be_valid
-    deal.errors_on(field).should == ["must be less than #{upper_bound}"]
-    
-    validation_sanity_check
+  def model_class
+    Deal
   end
   
   def valid_fields
@@ -134,10 +107,5 @@ describe Deal do
       :website => 'www.equeety.com',
       :contact_name => 'John Doe'
     }
-  end
-  
-  def validation_sanity_check
-     deal = Deal.new(valid_fields)
-     deal.should be_valid
   end
 end

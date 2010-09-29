@@ -14,4 +14,10 @@ describe Commitment do
     commitment.save.should be_true
     commitment.deal.should == deal
   end
+  
+  describe "amount" do
+    it "should be numeric"
+    it "should be positive"
+    it "should be less than $1,000,000,000"
+  end
 end
