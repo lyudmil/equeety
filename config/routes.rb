@@ -5,7 +5,9 @@ Equeety::Application.routes.draw do
 
   resource :user, :users
     
-  resources :deals
+  resources :deals do
+    resources :commitments
+  end
   
   root :to => 'static_pages#home'
   # The priority is based upon order of creation:

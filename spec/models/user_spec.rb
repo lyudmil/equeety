@@ -45,10 +45,10 @@ describe User do
   private
   
   def valid_fields
-  {
-    :email => "user@email.com",
-    :password => "pass",
-    :password_confirmation => "pass"
-  }
+    {
+      :email => "user@email.com",
+      :password => "pass",
+      :password_confirmation => "pass"
+    }
   end
 end
