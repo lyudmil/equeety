@@ -3,7 +3,8 @@ Equeety::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy', :as => :logout
   post 'user_sessions/create'
 
-  resource :user, :users
+  resource :user
+  resources :users, :only => [:new, :create]
     
   resources :deals do
     resources :commitments

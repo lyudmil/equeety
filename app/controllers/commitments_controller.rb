@@ -25,7 +25,11 @@ class CommitmentsController < ApplicationController
   def update
     @deal = Deal.find(params[:deal_id])
     @commitment = @deal.commitments.find(params[:id])
-    @commitment.update_attributes(params[:commitment])
+    if @commitment.update_attributes(params[:commitment])
+      redirect_to @deal
+    else
+      render :edit
+    end
   end
   
 end

@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe CommitmentsController do
   
-  before :each do
+  before do
     @deal = Deal.new(deal_parameters)
     @deal.save
     
-    @commitment = @deal.commitments.create(:amount => 1000, :user => @current_user)
-    
     @current_user = mock_model(User)
     controller.stub(:current_user).and_return(@current_user)
+    
+    @commitment = @deal.commitments.create(:amount => 123, :user => @current_user)
   end
   
   describe "new" do
@@ -61,9 +61,22 @@ describe CommitmentsController do
   end
   
   describe "update" do
-    it "should update the commitment based on the submitted parameters" do
-      @commitment.should_receive(:update_attributes).with(commitment_parameters)
+    it "should update the commitment attributes accordingly" do
       put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => commitment_parameters
+      
+      @commitment.reload.amount.should == 1000
+    end
+    
+    it "should redirect to deal if update successful" do
+      put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => commitment_parameters
+      
+      response.should redirect_to @deal
+    end
+    
+    it "should render the edit action again if update not successful" do
+      put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => {'amount' => '-100'}
+      
+      response.should render_template 'edit'
     end
   end
   
@@ -76,9 +89,9 @@ describe CommitmentsController do
   end
   
   def commitment_parameters
-    {
-      'amount' => '1000'
-    }
+  {
+    "amount" => "1000"
+  }
   end
   
   def deal_parameters
