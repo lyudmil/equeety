@@ -21,6 +21,11 @@ describe User do
       user = User.new :budget => 1000000000
       user.errors_on(:budget).should == ["must be less than 1000000000"]
     end
+    
+    it "can be nil" do
+      user = User.new :budget => nil
+      user.errors_on(:budget).should be_empty
+    end
   end
   
 end

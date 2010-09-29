@@ -22,21 +22,21 @@ describe UsersController do
     end
   end
   
-  describe "budget" do 
+  describe "edit" do 
     it "should be success" do
-      get 'budget'
+      get 'edit'
       response.should be_success
     end
     
     it "should find the current user" do
-      get 'budget'
+      get 'edit'
     
       assigns(:user).should == @user
     end
     
     it "should require the user to be logged in" do
       controller.should_receive(:require_user)
-      get 'budget'
+      get 'edit'
     end
   end
   
@@ -61,11 +61,11 @@ describe UsersController do
       response.should redirect_to @user
     end
     
-    it "should render the budget template if update unsuccessful" do
+    it "should render the edit template if update unsuccessful" do
       @user.stub(:update_attributes).and_return(false)
       put 'update', :user => {}
       
-      response.should render_template 'budget'
+      response.should render_template 'edit'
     end
     
     it "should require the user to be logged in" do

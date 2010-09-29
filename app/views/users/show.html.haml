@@ -6,4 +6,4 @@
   .budget
     %strong Budget:
     #{number_to_currency(@user.budget, :unit => "$")} 
-    = link_to "Edit", budget_url
+    = link_to "Edit", edit_user_url

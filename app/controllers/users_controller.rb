@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :require_user, :only => [:budget, :update, :show]
+  before_filter :require_user, :only => [:edit, :update, :show]
   before_filter :require_no_user, :only => [:new, :create]
   
   def new
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to deals_url, :notice => 'You have signed up successfully.'
     else
-      render :action => "new"
+      render :new
     end
   end
   
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = current_user
   end
   
-  def budget
+  def edit
     @user = current_user
   end
   
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(params[:user])
       redirect_to @user
     else
-      render :action => "budget"
+      render :edit
     end
   end
 end
