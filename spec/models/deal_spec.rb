@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'validation_test_helper'
 
 describe Deal do
   include ValidationTestHelper
@@ -88,13 +87,13 @@ describe Deal do
     deal = Deal.new(valid_fields)
     deal.save.should be_true
     
-    deal.commitments.create.should be_true
+    deal.commitments.create(:amount => 100).should be_true
     deal.save.should be_true
   end
   
   private
   
-  def model_class
+  def model
     Deal
   end
   
