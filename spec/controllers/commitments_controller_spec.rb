@@ -3,10 +3,9 @@ require 'spec_helper'
 describe CommitmentsController do
   
   before do
-    @deal = Deal.new(deal_parameters)
-    @deal.save
-    
-    @current_user = mock_model(User)
+    @current_user = User.new({:email => "me@somewhere.com", :password => "pass", :password_confirmation => "pass"})
+    @current_user.save.should be_true
+    @deal = @current_user.deals.create(deal_parameters)
     controller.stub(:current_user).and_return(@current_user)
     
     @commitment = @deal.commitments.create(:amount => 123, :user => @current_user)
@@ -58,6 +57,14 @@ describe CommitmentsController do
       assigns(:deal).should == @deal
       assigns(:commitment).should == @commitment
     end
+    
+    it "should refuse to edit if the current user is not the original investor" do
+      controller.stub(:current_user).and_return(mock_model(User))
+      get 'edit', :deal_id => @deal.id, :id => @commitment.id
+
+      response.should redirect_to :controller => :deals, :action => :index
+      flash[:notice].should == "You are not the original investor and therefore can't edit this investment."
+    end
   end
   
   describe "update" do
@@ -77,6 +84,14 @@ describe CommitmentsController do
       put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => {'amount' => '-100'}
       
       response.should render_template 'edit'
+    end
+    
+    it "should refuse to update if the current user is not the original investor" do
+      controller.stub(:current_user).and_return(mock_model(User))
+      put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => commitment_parameters
+      
+      response.should redirect_to :controller => :deals, :action => :index
+      flash[:notice].should == "You are not the original investor and therefore can't edit this investment."
     end
   end
   
