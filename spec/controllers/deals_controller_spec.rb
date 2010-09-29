@@ -1,9 +1,16 @@
 require 'spec_helper'
+require 'deal'
 
 describe DealsController do
   
   before :each do
     @current_user = mock_model(User)
+    @current_user.stub(:deals).and_return(Deal)
+    @current_user.stub(:has_access_to?).and_return(true)
+    
+    @deal = mock_model(Deal)
+    @deal.stub(:user).and_return(@current_user)
+    
     controller.stub(:current_user).and_return(@current_user)
   end
 
@@ -23,27 +30,30 @@ describe DealsController do
   end
   
   describe "create" do
+    before :each do
+      @current_user.should_receive(:deals).and_return(Deal)
+      Deal.should_receive(:build).with(deal_parameters).and_return(@deal)
+    end
+    
     it "should redirect to the index action if create successful" do
+      @deal.should_receive(:save).and_return(true)
       post 'create', {:deal => deal_parameters}
+      
       response.should redirect_to :controller => 'deals', :action => 'index'
     end
     
     it "should render the new template again if create was not successful" do
-      post 'create', {:deal => {}}
+      @deal.should_receive(:save).and_return(false)
+      post 'create', {:deal => deal_parameters}
       
       response.should render_template 'new'
     end
     
     it "should create a deal based on the submitted parameters" do
+      @deal.should_receive(:save).and_return(true)
       post 'create', {:deal => deal_parameters}
       
-      assigns(:deal).user.should == @current_user
-      assigns(:deal).startup_name.should == 'equeety'
-      assigns(:deal).website.should == 'equeety.com'
-      assigns(:deal).contact_name.should == 'stefano'
-      assigns(:deal).contact_email.should == 'me@email.com'
-      assigns(:deal).required_amount == 111
-      assigns(:deal).proposed_valuation == 222
+      assigns(:deal).should == @deal
     end
   end
 
@@ -70,7 +80,15 @@ describe DealsController do
       Deal.should_receive(:find).with(1).and_return(deal)
       get 'edit', :id => 1
       
-      assigns(:deal).should == deal
+      # assigns(:deal).should == deal
+    end
+  end
+  
+  %w(edit show).each do |action|
+    it "#{action} should require deal access" do
+      controller.should_receive(:require_user_access_to_deal)
+      
+      get action, :id => 1
     end
   end
   
@@ -98,6 +116,13 @@ describe DealsController do
       
       response.should render_template 'edit'
     end
+    
+    it "should fail if user does not have access to deal" do
+      @current_user.stub(:has_access_to?).with(@deal).and_return(false)
+      put 'update', :id => 23
+      
+      response.should redirect_to deals_url
+    end
   end
   
   describe "show" do
@@ -106,7 +131,7 @@ describe DealsController do
       get 'show', :id => 34
     end
   end
-  
+   
   private
   
   def deal_parameters

@@ -29,6 +29,13 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+  
+  def require_user_access_to_deal key_in_params = :id
+    @deal = Deal.find(params[key_in_params])
+    unless current_user.has_access_to? @deal
+      redirect_to deals_url, :notice => "You don't have access to this deal and therefore can't invest in it."
+    end
+  end
 
   def store_location
     session[:return_to] = request.request_uri

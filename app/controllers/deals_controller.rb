@@ -1,12 +1,13 @@
 class DealsController < ApplicationController
   before_filter :require_user
+  before_filter :require_user_access_to_deal, :only => [:edit, :update, :show]
   
   def new
     @deal = Deal.new
   end
 
   def create
-    @deal = Deal.new(deal_parameters)
+    @deal = current_user.deals.build(params[:deal])
     if @deal.save
       redirect_to :action => 'index'
     else
@@ -15,11 +16,9 @@ class DealsController < ApplicationController
   end
   
   def edit
-    @deal = Deal.find(params[:id])
   end
   
   def update
-    @deal = Deal.find(params[:id])
     if @deal.update_attributes(params[:deal])
       redirect_to deals_url
     else
@@ -28,7 +27,6 @@ class DealsController < ApplicationController
   end
   
   def show
-    @deal = Deal.find(params[:id])
   end
   
   def index
