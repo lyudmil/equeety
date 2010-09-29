@@ -17,4 +17,15 @@ class CommitmentsController < ApplicationController
     end
   end
   
+  def edit
+    @deal = Deal.find(params[:deal_id])
+    @commitment = @deal.commitments.find(params[:id])
+  end
+  
+  def update
+    @deal = Deal.find(params[:deal_id])
+    @commitment = @deal.commitments.find(params[:id])
+    @commitment.update_attributes(params[:commitment])
+  end
+  
 end

@@ -5,12 +5,13 @@ describe CommitmentsController do
   before :each do
     @deal = Deal.new(deal_parameters)
     @deal.save
-    @commitments = @deal.commitments
+    
+    @commitment = @deal.commitments.create(:amount => 1000, :user => @current_user)
     
     @current_user = mock_model(User)
     controller.stub(:current_user).and_return(@current_user)
   end
-
+  
   describe "new" do
     it "should be success" do
       get 'new', :deal_id => @deal.id
@@ -46,6 +47,23 @@ describe CommitmentsController do
       post 'create', :deal_id => @deal.id, :commitment => commitment_parameters
       
       response.should render_template 'new'
+    end
+  end
+  
+  describe "edit" do
+    it "should find the right commitment" do
+      get 'edit', :deal_id => @deal.id, :id => @commitment.id
+      
+      response.should be_success
+      assigns(:deal).should == @deal
+      assigns(:commitment).should == @commitment
+    end
+  end
+  
+  describe "update" do
+    it "should update the commitment based on the submitted parameters" do
+      @commitment.should_receive(:update_attributes).with(commitment_parameters)
+      put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => commitment_parameters
     end
   end
   
