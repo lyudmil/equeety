@@ -58,6 +58,23 @@ describe User do
     end
   end
   
+  describe "has invested in deal" do
+    it "should be true if the user has a commitment for that deal" do
+      user = User.create(valid_fields)
+      deal = user.deals.create(deal_fields)
+      user.commitments.create(:amount => 1, :deal => deal)
+      
+      user.has_invested_in?(deal).should be_true
+    end
+    
+    it "should be false if no commitments to that deal" do
+      user = User.create(valid_fields)
+      deal = user.deals.create(deal_fields)
+      
+      user.has_invested_in?(deal).should be_false
+    end
+  end
+  
   private
   
   def valid_fields
@@ -65,6 +82,17 @@ describe User do
       :email => "user@email.com",
       :password => "pass",
       :password_confirmation => "pass"
+    }
+  end
+  
+  def deal_fields
+    {
+      :required_amount => 111, 
+      :proposed_valuation => 222, 
+      :contact_email => 'me@email.com',
+      :startup_name => 'equeety',
+      :website => 'www.equeety.com',
+      :contact_name => 'John Doe'
     }
   end
 end

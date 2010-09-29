@@ -8,4 +8,11 @@ class User < ActiveRecord::Base
   def has_access_to? deal
     deal.user == self
   end
+  
+  def has_invested_in? deal
+    commitments.each do |commitment| 
+      return true if commitment.deal == deal
+    end
+    false
+  end
 end
