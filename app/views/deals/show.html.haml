@@ -6,10 +6,10 @@
   %span.name= mail_to @deal.contact_name, @deal.contact_email
 .required_amount
   %strong Required:
-  $#{@deal.required_amount}
+  #{number_to_currency(@deal.required_amount, :unit => "$")}
 .proposed_valuation
   %strong Proposed valuation:
-  $#{@deal.proposed_valuation}
+  #{number_to_currency(@deal.proposed_valuation, :unit => "$")}
 .closing_date
   %strong Closing date:
   = @deal.closing_date? ? @deal.closing_date : :none

@@ -81,6 +81,14 @@ describe Deal do
     assert_validates_presence_of :contact_name
   end
   
+  it "should have many commitments" do
+    deal = Deal.new(valid_fields)
+    deal.save.should be_true
+    
+    deal.commitments.create.should be_true
+    deal.save.should be_true
+  end
+  
   private
   # These should perhaps be in a helper? 
   # I also tried installing remarkable_rails to replace this but it didn't work right away, so I held off

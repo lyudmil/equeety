@@ -15,7 +15,7 @@
           #{number_to_currency(deal.required_amount, :unit => "$")}
         .proposed_valuation
           %strong Proposed valuation:
-          $#{number_to_currency(deal.proposed_valuation, :unit => "$")}
+          #{number_to_currency(deal.proposed_valuation, :unit => "$")}
         .closing_date
           %strong Closing date:
           = deal.closing_date? ? deal.closing_date : :none
@@ -23,4 +23,4 @@
           %strong Round:
           = deal.round
         = link_to "Edit", edit_deal_url(deal)
-        = link_to "Show", deal
+        = link_to "Details", deal
