@@ -31,6 +31,15 @@ describe Commitment do
     end
   end
   
+  it "should be unique for each investor and deal" do
+    user = mock_model(User)
+    deal = mock_model(Deal)
+    Commitment.new(:amount => 1, :user => user, :deal => deal).save.should be_true
+    second_investment = Commitment.new(:amount => 2, :user => user, :deal => deal)
+    second_investment.save.should be_false
+    second_investment.errors_on(:user_id).should == ["You can only invest in a deal once."]
+  end
+  
   private
   
   def model
