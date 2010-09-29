@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
   
   has_many :deals
   has_many :commitments
+  
+  def has_access_to? deal
+    deal.user == self
+  end
 end

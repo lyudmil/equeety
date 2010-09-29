@@ -42,6 +42,22 @@ describe User do
     user.commitments.create.should be_true
   end
   
+  describe "has access to deal" do
+    it "should be true if the user is the owner of the deal" do
+      user = User.new
+      deal = Deal.new(:user => user)
+      
+      user.has_access_to?(deal).should be_true
+    end
+    
+    it "should be false if the user is not the owner of the deal" do
+      user = User.new
+      deal = Deal.new(:user => mock_model(User))
+      
+      user.has_access_to?(deal).should be_false
+    end
+  end
+  
   private
   
   def valid_fields

@@ -23,6 +23,14 @@ describe CommitmentsController do
       assigns(:deal).should == @deal
       assigns(:commitment).should == commitment
     end
+    
+    it "should not allow users that do not have access to a deal to invest" do
+      controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => false))
+      get 'new', :deal_id => @deal.id
+      
+      response.should redirect_to :controller => :deals, :action => :index
+      flash[:notice].should == "You don't have access to this deal and therefore can't invest in it."
+    end
   end
   
   describe "create" do
@@ -57,14 +65,6 @@ describe CommitmentsController do
       assigns(:deal).should == @deal
       assigns(:commitment).should == @commitment
     end
-    
-    it "should refuse to edit if the current user is not the original investor" do
-      controller.stub(:current_user).and_return(mock_model(User))
-      get 'edit', :deal_id => @deal.id, :id => @commitment.id
-
-      response.should redirect_to :controller => :deals, :action => :index
-      flash[:notice].should == "You are not the original investor and therefore can't edit this investment."
-    end
   end
   
   describe "update" do
@@ -85,13 +85,35 @@ describe CommitmentsController do
       
       response.should render_template 'edit'
     end
-    
-    it "should refuse to update if the current user is not the original investor" do
-      controller.stub(:current_user).and_return(mock_model(User))
-      put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => commitment_parameters
-      
-      response.should redirect_to :controller => :deals, :action => :index
-      flash[:notice].should == "You are not the original investor and therefore can't edit this investment."
+  end
+  
+  describe "enforcement of access rules for commitments" do
+    %w(edit update).each do |action|
+      it "should refuse to #{action} if the current user is not the original investor" do
+        controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => true))
+        
+        get 'edit', :deal_id => @deal.id, :id => @commitment.id if action == 'edit'
+        put 'update', :deal_id => @deal.id, :id => @commitment.id if action == 'update'
+
+        response.should redirect_to :controller => :deals, :action => :index
+        flash[:notice].should == "You are not the original investor and therefore can't edit this investment."
+      end
+    end
+  end
+  
+  describe "enforcement of access rules for deals" do
+    %w(new create edit update).each do |action|
+      it "#{action} should not allow users that do not have access to a deal to invest" do
+        controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => false))
+        
+        get 'new', :deal_id => @deal.id if action == 'new'
+        post 'create', :deal_id => @deal.id if action == 'create'
+        get 'edit', :deal_id => @deal.id, :id => @commitment.id if action == 'edit'
+        put 'update', :deal_id => @deal.id, :id => @commitment.id if action == 'update'
+        
+        response.should redirect_to :controller => :deals, :action => :index
+        flash[:notice].should == "You don't have access to this deal and therefore can't invest in it."
+      end
     end
   end
   
