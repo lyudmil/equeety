@@ -75,6 +75,32 @@ describe User do
     end
   end
   
+  describe "committed budget" do
+    it "should be the total commitments" do
+      user = User.create(valid_fields)
+      user.commitments.create(:amount => 111)
+      user.commitments.create(:amount => 222)
+      
+      user.committed_budget.should == 333
+    end
+  end
+  
+  describe "remaining budget" do
+    it "should be the difference between the original budget and the comitted budget" do
+      user = User.create(valid_fields.merge :budget => 1000)
+      user.commitments.create(:amount => 340)
+      
+      user.remaining_budget.should == 660
+    end
+    
+    it "should not blow up when budget not set" do
+      user = User.create(valid_fields)
+      user.commitments.create(:amount => 100)
+      
+      user.remaining_budget.should == -100
+    end
+  end
+  
   private
   
   def valid_fields

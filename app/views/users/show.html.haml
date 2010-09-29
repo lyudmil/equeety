@@ -4,6 +4,12 @@
     %strong Email:
     #{@user.email}
   .budget
-    %strong Budget:
+    %strong Initial budget:
     #{number_to_currency(@user.budget, :unit => "$")} 
     = link_to "Edit", edit_user_url
+  .committed_budget
+    %strong Committed budget:
+    #{number_to_currency(@user.committed_budget, :unit => "$")}
+  .remaining_budget
+    %strong Remaining budget:
+    #{number_to_currency(@user.remaining_budget, :unit => "$")}

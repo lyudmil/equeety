@@ -10,9 +10,17 @@ class User < ActiveRecord::Base
   end
   
   def has_invested_in? deal
-    commitments.each do |commitment| 
-      return true if commitment.deal == deal
-    end
-    false
+    commitments.any? { |commitment| commitment.deal == deal }
+  end
+  
+  def committed_budget
+    committed_budget = 0
+    commitments.each { |commitment| committed_budget += commitment.amount }
+    committed_budget
+  end
+  
+  def remaining_budget
+    return -committed_budget unless budget
+    budget - committed_budget
   end
 end
