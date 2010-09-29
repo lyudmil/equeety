@@ -17,10 +17,10 @@ describe CommitmentsController do
     end
     
     it "should create a new commitment" do
-      commitment = mock_model(Commitment)
-      Commitment.should_receive(:new).and_return(commitment)
-      
+      commitment = newly_created_commitment
       get 'new', :deal_id => @deal.id
+      
+      assigns(:deal).should == @deal
       assigns(:commitment).should == commitment
     end
   end

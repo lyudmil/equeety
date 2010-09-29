@@ -16,4 +16,11 @@
 .round
   %strong Round:
   = @deal.round
+.commitments
+  %strong Commitments by investors
+  %ul
+    - for commitment in @deal.commitments
+      %li #{number_to_currency(commitment.amount, :unit => "$")} (#{commitment.user.email})
+
+=link_to "Invest in this deal", new_deal_commitment_url(@deal)
 =link_to "Back", deals_url

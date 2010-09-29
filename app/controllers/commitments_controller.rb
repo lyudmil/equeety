@@ -1,7 +1,8 @@
 class CommitmentsController < ApplicationController
   
   def new
-    @commitment = Commitment.new
+    @deal = Deal.find(params[:deal_id])
+    @commitment = @deal.commitments.build
   end
   
   def create

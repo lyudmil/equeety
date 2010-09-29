@@ -1,0 +1,12 @@
+= form_for [@deal, @commitment] do |f|
+  - if @commitment.errors.any?
+    #error_explanation
+      %ul
+        - @commitment.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :amount
+    %br/
+    = f.text_field :amount
+  .actions
+    = f.submit :value => 'Invest'
