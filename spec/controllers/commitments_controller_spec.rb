@@ -2,31 +2,38 @@ require 'spec_helper'
 
 describe CommitmentsController do
   
-  before do
-    @current_user = User.new(:email => "me@somewhere.com", :password => "pass", :password_confirmation => "pass", :budget => 100000)
-    @current_user.save.should be_true
-    @deal = @current_user.deals.create(deal_parameters)
-    controller.stub(:current_user).and_return(@current_user)
+  before :each do
+    @current_user = mock_model(User, :budget => 100000)
+    @current_user.stub(:deals).and_return(Deal)
+    @current_user.stub(:has_access_to?).and_return(true)
     
-    @commitment = @deal.commitments.create(:amount => 123, :user => @current_user)
+    @exiting_deal = mock_model(Deal, deal_parameters.merge(:user => @current_user))
+    @exiting_deal.stub(:commitments).and_return(Commitment)
+    Deal.stub(:find).with(@exiting_deal.id).and_return(@exiting_deal)
+    
+    @commitment = mock_model(Commitment, :amount => 123, :user => @current_user)
+    Commitment.stub(:find).with(@commitment.id).and_return(@commitment)
+    
+    controller.stub(:current_user).and_return(@current_user)
   end
   
   describe "new" do
     it "should be success" do
-      get 'new', :deal_id => @deal.id
+      Commitment.stub(:build).and_return(@commitment)
+      get 'new', :deal_id => @exiting_deal.id
     end
     
     it "should create a new commitment" do
-      commitment = newly_created_commitment
-      get 'new', :deal_id => @deal.id
+      Commitment.stub(:build).and_return(@commitment)
+      get 'new', :deal_id => @exiting_deal.id
       
-      assigns(:deal).should == @deal
-      assigns(:commitment).should == commitment
+      assigns(:deal).should == @exiting_deal
+      assigns(:commitment).should == @commitment
     end
     
     it "should not allow users that do not have access to a deal to invest" do
       controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => false))
-      get 'new', :deal_id => @deal.id
+      get 'new', :deal_id => @exiting_deal.id
       
       response.should redirect_to :controller => :deals, :action => :index
       flash[:notice].should == "You don't have access to this deal and therefore can't invest in it."
@@ -34,24 +41,30 @@ describe CommitmentsController do
   end
   
   describe "create" do
-    it "should create a commitment based on submitted parameters" do
-      post 'create', :deal_id => @deal.id, :commitment => commitment_parameters
+    before :each do
+      @created_commitment = mock_model(Commitment)
+      @created_commitment.should_receive(:user=).with(@current_user)
+      @created_commitment.stub(:save)
+      Commitment.stub(:build).with(commitment_parameters).and_return(@created_commitment)
       
-      assigns(:commitment).amount.should == 1000
-      assigns(:commitment).deal.should == @deal
-      assigns(:commitment).user.should == @current_user
+      @exiting_deal.should_receive(:commitments).and_return(Commitment)  
+    end
+    
+    it "should create a commitment based on submitted parameters" do
+      Commitment.should_receive(:build).with(commitment_parameters).and_return(@created_commitment)
+      post 'create', :deal_id => @exiting_deal.id, :commitment => commitment_parameters
     end
     
     it "should redirect to the deal if save successful" do
-      newly_created_commitment.should_receive(:save).and_return(true)
-      post 'create', :deal_id => @deal.id, :commitment => commitment_parameters
+      @created_commitment.should_receive(:save).and_return(true)
+      post 'create', :deal_id => @exiting_deal.id, :commitment => commitment_parameters
       
-      response.should redirect_to @deal
+      response.should redirect_to @exiting_deal
     end
     
     it "should render the new template again if save not successful" do
-      newly_created_commitment.should_receive(:save).and_return(false)
-      post 'create', :deal_id => @deal.id, :commitment => commitment_parameters
+      @created_commitment.should_receive(:save).and_return(false)
+      post 'create', :deal_id => @exiting_deal.id, :commitment => commitment_parameters
       
       response.should render_template 'new'
     end
@@ -59,29 +72,31 @@ describe CommitmentsController do
   
   describe "edit" do
     it "should find the right commitment" do
-      get 'edit', :deal_id => @deal.id, :id => @commitment.id
+      get 'edit', :deal_id => @exiting_deal.id, :id => @commitment.id
       
       response.should be_success
-      assigns(:deal).should == @deal
+      assigns(:deal).should == @exiting_deal
       assigns(:commitment).should == @commitment
     end
   end
   
   describe "update" do
     it "should update the commitment attributes accordingly" do
-      put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => commitment_parameters
+      @commitment.should_receive(:update_attributes).with(commitment_parameters)
       
-      @commitment.reload.amount.should == 1000
+      put 'update', :deal_id => @exiting_deal.id, :id => @commitment.id, :commitment => commitment_parameters
     end
     
     it "should redirect to deal if update successful" do
-      put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => commitment_parameters
+      @commitment.should_receive(:update_attributes).with(commitment_parameters).and_return(true)
+      put 'update', :deal_id => @exiting_deal.id, :id => @commitment.id, :commitment => commitment_parameters
       
-      response.should redirect_to @deal
+      response.should redirect_to @exiting_deal
     end
     
     it "should render the edit action again if update not successful" do
-      put 'update', :deal_id => @deal.id, :id => @commitment.id, :commitment => {'amount' => '-100'}
+      @commitment.should_receive(:update_attributes).with(commitment_parameters).and_return(false)
+      put 'update', :deal_id => @exiting_deal.id, :id => @commitment.id, :commitment => commitment_parameters
       
       response.should render_template 'edit'
     end
@@ -92,8 +107,8 @@ describe CommitmentsController do
       it "should refuse to #{action} if the current user is not the original investor" do
         controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => true))
         
-        get 'edit', :deal_id => @deal.id, :id => @commitment.id if action == 'edit'
-        put 'update', :deal_id => @deal.id, :id => @commitment.id if action == 'update'
+        get 'edit', :deal_id => @exiting_deal.id, :id => @commitment.id if action == 'edit'
+        put 'update', :deal_id => @exiting_deal.id, :id => @commitment.id if action == 'update'
 
         response.should redirect_to :controller => :deals, :action => :index
         flash[:notice].should == "You are not the original investor and therefore can't edit this investment."
@@ -106,10 +121,10 @@ describe CommitmentsController do
       it "#{action} should not allow users that do not have access to a deal to invest" do
         controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => false))
         
-        get 'new', :deal_id => @deal.id if action == 'new'
-        post 'create', :deal_id => @deal.id if action == 'create'
-        get 'edit', :deal_id => @deal.id, :id => @commitment.id if action == 'edit'
-        put 'update', :deal_id => @deal.id, :id => @commitment.id if action == 'update'
+        get 'new', :deal_id => @exiting_deal.id if action == 'new'
+        post 'create', :deal_id => @exiting_deal.id if action == 'create'
+        get 'edit', :deal_id => @exiting_deal.id, :id => @commitment.id if action == 'edit'
+        put 'update', :deal_id => @exiting_deal.id, :id => @commitment.id if action == 'update'
         
         response.should redirect_to :controller => :deals, :action => :index
         flash[:notice].should == "You don't have access to this deal and therefore can't invest in it."
@@ -118,12 +133,6 @@ describe CommitmentsController do
   end
   
   private
-  
-  def newly_created_commitment
-    commitment = Commitment.new
-    Commitment.stub(:new).and_return(commitment)
-    commitment
-  end
   
   def commitment_parameters
   {
