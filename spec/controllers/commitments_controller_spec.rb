@@ -3,7 +3,7 @@ require 'spec_helper'
 describe CommitmentsController do
   
   before do
-    @current_user = User.new({:email => "me@somewhere.com", :password => "pass", :password_confirmation => "pass"})
+    @current_user = User.new(:email => "me@somewhere.com", :password => "pass", :password_confirmation => "pass", :budget => 100000)
     @current_user.save.should be_true
     @deal = @current_user.deals.create(deal_parameters)
     controller.stub(:current_user).and_return(@current_user)
