@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   
   has_many :deals
   has_many :commitments
+  has_many :invitations
   
   def has_access_to? deal
     deal.user == self

@@ -9,6 +9,13 @@ describe Deal do
     deal.user.should == user
   end
   
+  it "should have many invitations" do
+    deal = Deal.new(valid_fields)
+    deal.save.should be_true
+    
+    deal.invitations.create.should be_true
+  end
+  
   describe "required amount" do
     it "should be numeric" do
       assert_validates_numericality_of :required_amount

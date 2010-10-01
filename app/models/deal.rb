@@ -1,6 +1,7 @@
 class Deal < ActiveRecord::Base
   belongs_to :user
   has_many :commitments
+  has_many :invitations
   
   validates_presence_of :startup_name, :website, :contact_name
   validates_numericality_of :required_amount, :greater_than => 0, :less_than => 10000000

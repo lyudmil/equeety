@@ -8,6 +8,20 @@ describe User do
     user.deals.create.should be_true
   end
   
+  it "should have many commitments" do
+    user = User.new(valid_fields)
+    user.save.should be_true
+    
+    user.commitments.create.should be_true
+  end
+  
+  it "should have many invitations" do
+    user = User.new(valid_fields)
+    user.save.should be_true
+    
+    user.invitations.create.should be_true
+  end
+  
   describe "budget" do
     it "should be an attribute" do
       user = User.new :budget => 1234
@@ -34,14 +48,7 @@ describe User do
       user.errors_on(:budget).should be_empty
     end
   end
-  
-  it "should have many commitments" do
-    user = User.new(valid_fields)
-    user.save.should be_true
     
-    user.commitments.create.should be_true
-  end
-  
   describe "has access to deal" do
     it "should be true if the user is the owner of the deal" do
       user = User.new
