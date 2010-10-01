@@ -6,12 +6,14 @@ class InvitationsController < ApplicationController
   end
   
   def create
-    @invitation = @deal.invitations.build
     user = User.find_by_email(params[:email])
-    @invitation.user = user
-    @invitation.save
+    @invitation = @deal.invitations.build(:user => user)
     
-    redirect_to @deal, :notice => "You've invited #{user.email} to invest in #{@deal.startup_name}."
+    if @invitation.save
+      redirect_to @deal, :notice => "You've invited #{user.email} to invest in #{@deal.startup_name}."
+    else
+      render :new
+    end
   end
   
   private

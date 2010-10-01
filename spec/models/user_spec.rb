@@ -57,7 +57,15 @@ describe User do
       user.has_access_to?(deal).should be_true
     end
     
-    it "should be false if the user is not the owner of the deal" do
+    it "should be true if the user has been invited to the deal" do
+      user = User.new
+      deal = Deal.new(:user => mock_model(User))
+      user.invitations.build(:deal => deal)
+      
+      user.has_access_to?(deal).should be_true
+    end
+    
+    it "should be false if the user is not the owner of the deal and has not been invited to it" do
       user = User.new
       deal = Deal.new(:user => mock_model(User))
       

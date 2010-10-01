@@ -9,7 +9,8 @@ describe InvitationsController do
     @invitation = mock_model(Invitation, :user= => true, :save => true)
     
     @deal = mock_model(Deal, :user => @current_user, :startup_name => 'startup')
-    @deal.stub(:invitations).and_return(mock(:build => @invitation))
+    @invitations = mock(:build => @invitation)
+    @deal.stub(:invitations).and_return(@invitations)
     Deal.stub(:find).with(@deal.id).and_return(@deal)
   end
   
@@ -29,7 +30,7 @@ describe InvitationsController do
     end
     
     it "should build a new invitation addressed to the appropriate user" do  
-      @invitation.should_receive(:user=).with(@user)
+      @invitations.should_receive(:build).with(:user => @user)
       
       post 'create', :deal_id => @deal.id, :email => @user.email
     end
@@ -41,6 +42,14 @@ describe InvitationsController do
       
       response.should redirect_to @deal
       flash[:notice].should == "You've invited #{@user.email} to invest in #{@deal.startup_name}."
+    end
+    
+    it "should render the new template if save not successful" do
+      @invitation.should_receive(:save).and_return(false)
+      
+      post 'create', :deal_id => @deal.id, :email => @user.email
+      
+      response.should render_template 'new'
     end
   end
   
