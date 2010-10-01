@@ -18,11 +18,6 @@ describe CommitmentsController do
   end
   
   describe "new" do
-    it "should be success" do
-      Commitment.stub(:build).and_return(@commitment)
-      get 'new', :deal_id => @exiting_deal.id
-    end
-    
     it "should create a new commitment" do
       Commitment.stub(:build).and_return(@commitment)
       get 'new', :deal_id => @exiting_deal.id

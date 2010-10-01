@@ -8,6 +8,7 @@ Equeety::Application.routes.draw do
     
   resources :deals do
     resources :commitments
+    resources :invitations, :only => [:new, :create]
   end
   
   root :to => 'static_pages#home'
