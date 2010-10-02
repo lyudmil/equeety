@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+  before_filter :require_user
   before_filter :require_user_access_to_deal_to_invite
   
   def new

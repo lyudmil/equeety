@@ -53,4 +53,18 @@ describe InvitationsController do
     end
   end
   
+  describe "require login for" do
+    %w(new create).each do |action|
+      it action do
+        user = mock_model(User, :email => 'mock@email.com')
+        User.stub(:find_by_email).with(user.email).and_return(user)
+        
+        controller.should_receive(:require_user)
+        
+        get 'new', :deal_id => @deal.id if action == 'new'
+        post 'create', :deal_id => @deal.id, :email => user.email if action == 'create'
+      end
+    end
+  end
+  
 end
