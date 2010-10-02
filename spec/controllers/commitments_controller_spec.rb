@@ -111,18 +111,37 @@ describe CommitmentsController do
     end
   end
   
-  describe "enforcement of access rules for deals" do
+  describe "enforcement of access rules for deals:" do
+    before :each do
+      @commitment.stub(:update_attributes)
+      @commitment.stub(:user=)
+      @commitment.stub(:save)
+      Commitment.stub(:build).and_return(@commitment)
+    end
+    
     %w(new create edit update).each do |action|
       it "#{action} should not allow users that do not have access to a deal to invest" do
         controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => false))
         
-        get 'new', :deal_id => @exiting_deal.id if action == 'new'
-        post 'create', :deal_id => @exiting_deal.id if action == 'create'
-        get 'edit', :deal_id => @exiting_deal.id, :id => @commitment.id if action == 'edit'
-        put 'update', :deal_id => @exiting_deal.id, :id => @commitment.id if action == 'update'
+        dispatch action
         
         response.should redirect_to :controller => :deals, :action => :index
         flash[:notice].should == "You don't have access to this deal and therefore can't invest in it."
+      end
+      
+      it "#{action} should require login" do
+        controller.should_receive(:require_user).and_return(false)
+        
+        dispatch action
+      end
+      
+      private
+      
+      def dispatch action
+        get 'new', :deal_id => @exiting_deal.id if action == 'new'
+        post 'create', :deal_id => @exiting_deal.id, :commitment => commitment_parameters if action == 'create'
+        get 'edit', :deal_id => @exiting_deal.id, :id => @commitment.id if action == 'edit'
+        put 'update', :deal_id => @exiting_deal.id, :id => @commitment.id , :commitment => commitment_parameters if action == 'update'
       end
     end
   end

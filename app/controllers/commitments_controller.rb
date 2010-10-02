@@ -1,4 +1,5 @@
 class CommitmentsController < ApplicationController
+  before_filter :require_user
   before_filter :require_user_access_to_deal_to_invest
   before_filter :require_user_access_to_commitment, :only => [:edit, :update]
   
