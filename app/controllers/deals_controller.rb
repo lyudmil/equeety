@@ -31,6 +31,7 @@ class DealsController < ApplicationController
   
   def index
     @deals = Deal.where(:user_id => current_user)
+    @deals_invited_to = current_user.invitations.collect { |invite| invite.deal }
   end
   
   private

@@ -35,6 +35,7 @@ describe Commitment do
     user = mock_model(User, :remaining_budget => 100000, :commitments => [])
     deal = mock_model(Deal)
     Commitment.new(:amount => 1, :user => user, :deal => deal).save.should be_true
+    
     second_investment = Commitment.new(:amount => 2, :user => user, :deal => deal)
     second_investment.valid?.should be_false
     second_investment.errors_on(:user_id).should == ["You can only invest in a deal once."]

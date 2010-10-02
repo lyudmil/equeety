@@ -25,4 +25,5 @@
 
 - unless current_user.has_invested_in?(@deal)
   =link_to "Invest in this deal", new_deal_commitment_url(@deal)
+=link_to "Invite others to invest", new_deal_invitation_url(@deal)
 =link_to "Back to deals", deals_url

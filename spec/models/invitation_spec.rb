@@ -27,6 +27,16 @@ describe Invitation do
     assert_validates_presence_of :deal
   end
   
+  it "should be unique for each user and deal" do
+    deal = mock_model(Deal)
+    user = mock_model(User)
+    Invitation.new(:deal => deal, :user => user).save.should be_true
+    
+    second_invitation = Invitation.new(:deal => deal, :user => user)
+    second_invitation.save.should be_false
+    second_invitation.errors_on(:user_id).should == ["already knows about this deal."]
+  end
+  
   private
   
   def model

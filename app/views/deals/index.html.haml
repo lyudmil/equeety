@@ -2,8 +2,34 @@
 %div
   = link_to "New deal", new_deal_url
 %div
+  %h2 Your deals:
   %ul
     - for deal in @deals
+      %li
+        .logo= image_tag(deal.logo_url) if deal.logo_url?
+        .name= link_to_if deal.website?, sanitize(deal.startup_name), sanitize(deal.website)
+        .contact
+          %strong Contact:
+          %span.name= mail_to deal.contact_name, deal.contact_email
+        .required_amount
+          %strong Required:
+          #{number_to_currency(deal.required_amount, :unit => "$")}
+        .proposed_valuation
+          %strong Proposed valuation:
+          #{number_to_currency(deal.proposed_valuation, :unit => "$")}
+        .closing_date
+          %strong Closing date:
+          = deal.closing_date? ? deal.closing_date : :none
+        .round
+          %strong Round:
+          = deal.round
+        = link_to "Edit", edit_deal_url(deal)
+        = link_to "Details", deal
+
+%div
+  %h2 Deals by other investors:
+  %ul
+    - for deal in @deals_invited_to
       %li
         .logo= image_tag(deal.logo_url) if deal.logo_url?
         .name= link_to_if deal.website?, sanitize(deal.startup_name), sanitize(deal.website)

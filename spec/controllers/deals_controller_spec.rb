@@ -61,6 +61,10 @@ describe DealsController do
     before do
       @deals = [mock_model(Deal), mock_model(Deal)]
       Deal.should_receive(:where).with(:user_id => @current_user).and_return(@deals)
+      
+      @deals_invited_to = [mock_model(Deal), mock_model(Deal)]
+      invitations = [Invitation.new(:deal => @deals_invited_to[0]), Invitation.new(:deal => @deals_invited_to[1])]
+      @current_user.stub(:invitations).and_return(invitations)
     end
     
     it "should be successful" do
@@ -72,6 +76,12 @@ describe DealsController do
       get 'index' 
       assigns(:deals).should == @deals
     end
+    
+    it "should find all the deals the current user has been invited to" do
+      get 'index'
+      
+      assigns(:deals_invited_to).should == @deals_invited_to
+    end
   end
   
   describe "edit" do
@@ -80,7 +90,7 @@ describe DealsController do
       Deal.should_receive(:find).with(1).and_return(deal)
       get 'edit', :id => 1
       
-      # assigns(:deal).should == deal
+      assigns(:deal).should == deal
     end
   end
   

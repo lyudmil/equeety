@@ -1,0 +1,13 @@
+%h1 Invite someone to invest in #{@deal.startup_name}
+= form_for [@deal, @invitation] do |f|
+  - if @invitation.errors.any?
+    #error_explanation
+      %ul
+        - @invitation.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = label_tag :email
+    %br/
+    = text_field_tag :email
+  .actions
+    = f.submit :value => 'Sign up'
