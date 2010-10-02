@@ -7,11 +7,15 @@ class User < ActiveRecord::Base
   has_many :invitations
   
   def has_access_to? deal
-    deal.user == self or invitations.any? { |invite| invite.deal == deal }
+    owns? deal or invitations.any? { |invite| invite.deal == deal }
   end
   
   def has_invested_in? deal
     commitments.any? { |commitment| commitment.deal == deal }
+  end
+  
+  def owns? deal
+    deal.user == self
   end
   
   def committed_budget

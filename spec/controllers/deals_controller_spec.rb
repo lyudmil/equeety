@@ -85,27 +85,32 @@ describe DealsController do
   end
   
   describe "edit" do
-    it "should find the deal to edit" do
-      deal = mock_model(Deal)
-      Deal.should_receive(:find).with(1).and_return(deal)
-      get 'edit', :id => 1
-      
-      assigns(:deal).should == deal
+    before :each do
+      @deal = mock_model(Deal)
+      Deal.stub(:find).with(@deal.id).and_return(@deal)
     end
-  end
-  
-  %w(edit show).each do |action|
-    it "#{action} should require deal access" do
-      controller.should_receive(:require_user_access_to_deal)
+    
+    it "should find the deal to edit" do
+      @current_user.stub(:owns?).with(@deal).and_return(true)
+      get 'edit', :id => @deal.id
       
-      get action, :id => 1
+      assigns(:deal).should == @deal
+    end
+    
+    it "should fail if user does not own the deal" do
+      @current_user.stub(:owns?).with(@deal).and_return(false)
+      get 'edit', :id => @deal.id
+      
+      response.should redirect_to deals_url
     end
   end
   
   describe "update" do
     before do
       @deal = mock_model(Deal)
-      Deal.should_receive(:find).with(23).and_return(@deal)
+      Deal.stub(:find).with(23).and_return(@deal)
+      
+      @current_user.stub(:owns?).and_return(true)
     end
     
     it "should update the deal based on the submitted parameters" do
@@ -127,11 +132,13 @@ describe DealsController do
       response.should render_template 'edit'
     end
     
-    it "should fail if user does not have access to deal" do
-      @current_user.stub(:has_access_to?).with(@deal).and_return(false)
+    it "should fail if user does not own the deal" do
+      @deal.stub(:update_attributes).and_return(true)
+      @current_user.stub(:owns?).with(@deal).and_return(false)
       put 'update', :id => 23
       
       response.should redirect_to deals_url
+      flash[:notice].should == "You need to own this deal to edit it."
     end
   end
   
@@ -139,6 +146,12 @@ describe DealsController do
     it "should find the right deal" do
       Deal.should_receive(:find).with(34)
       get 'show', :id => 34
+    end
+    
+    it "should require deal access" do
+      controller.should_receive(:require_user_access_to_deal)
+      
+      get 'show', :id => 1
     end
   end
    

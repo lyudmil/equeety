@@ -36,6 +36,13 @@ class ApplicationController < ActionController::Base
       redirect_to deals_url, :notice => "You don't have access to this deal and therefore can't invest in it."
     end
   end
+  
+  def require_user_ownership_of_deal
+    @deal = Deal.find(params[:id])
+    unless current_user.owns? @deal
+      redirect_to deals_url, :notice => "You need to own this deal to edit it."
+    end
+  end
 
   def store_location
     session[:return_to] = request.request_uri

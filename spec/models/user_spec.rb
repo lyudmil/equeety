@@ -116,6 +116,23 @@ describe User do
     end
   end
   
+  describe "owns?" do
+    it "should be true if user is the owner of the deal" do
+      user = User.new
+      deal = Deal.new(:user => user)
+      user.deals.push(deal)
+      
+      user.owns?(deal).should be_true
+    end
+    
+    it "should be false if user is not the owner of the deal" do
+      user = User.new
+      deal = Deal.new(:user => mock_model(User))
+      
+      user.owns?(deal).should be_false
+    end
+  end
+  
   private
   
   def valid_fields
