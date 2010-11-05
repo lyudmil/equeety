@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101001142615) do
+ActiveRecord::Schema.define(:version => 20101105220520) do
 
   create_table "commitments", :force => true do |t|
     t.decimal  "amount",     :precision => 12, :scale => 2
@@ -49,7 +49,8 @@ ActiveRecord::Schema.define(:version => 20101001142615) do
     t.string   "persistence_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "budget",            :precision => 12, :scale => 2
+    t.decimal  "budget"
+    t.string   "nickname"
   end
 
 end

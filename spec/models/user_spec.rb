@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe User do
+  it "should have a nickname" do
+    user = User.new(valid_fields)
+    user.nickname = 'lyudmil'
+    
+    assert_equal 'lyudmil', user.nickname
+    user.save.should be_true
+  end
+  
   it "should have many deals" do
     user = User.new(valid_fields)
     user.save.should be_true
