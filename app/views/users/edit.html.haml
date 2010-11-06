@@ -1,4 +1,4 @@
-%h1 Edit budget
+%h1 Edit user profile
 = form_for @user do |f|
   - if @user.errors.any?
     #error_explanation
@@ -9,5 +9,12 @@
     = f.label :budget
     %br/
     = f.text_field :budget
+    %br/
+    %br/
+  .field
+    = f.label "Nickname for your public page"
+    %br/
+    www.equeety.com/offers/ 
+    = f.text_field :nickname
   .actions
-    = f.submit :value => 'Set budget'
+    = f.submit :value => 'Save changes'

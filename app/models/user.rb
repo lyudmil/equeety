@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic
   validates_numericality_of :budget, :greater_than => 0, :less_than => 1000000000, :allow_nil => true
+  validates_uniqueness_of :nickname, :allow_blank => true, :case_sensitive => false
   
   has_many :deals
   has_many :commitments

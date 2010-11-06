@@ -3,10 +3,20 @@ require 'spec_helper'
 describe User do
   it "should have a nickname" do
     user = User.new(valid_fields)
-    user.nickname = 'lyudmil'
+    user.nickname = 'nickname'
     
     user.save.should be_true
-    assert_equal 'lyudmil', user.reload.nickname
+    assert_equal 'nickname', user.reload.nickname
+  end
+  
+  it "should have a unique nickname" do
+    user1 = User.new(valid_fields)
+    user1.nickname = 'nickname'
+    user1.save.should be_true
+    
+    user2 = User.new(valid_fields)
+    user2.nickname = 'niCKnamE'
+    user2.errors_on(:nickname).should == ['has already been taken']
   end
   
   it "should have many deals" do
