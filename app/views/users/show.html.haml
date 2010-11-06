@@ -12,4 +12,7 @@
   .remaining_budget
     %strong Remaining budget:
     #{number_to_currency(@user.remaining_budget, :unit => "$")}
+  .public_page
+    %strong Public page URL:
+    www.equeety.com/offers/#{@user.nickname}
   = link_to "Edit profile", edit_user_url
