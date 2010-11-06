@@ -5,8 +5,8 @@ describe User do
     user = User.new(valid_fields)
     user.nickname = 'lyudmil'
     
-    assert_equal 'lyudmil', user.nickname
     user.save.should be_true
+    assert_equal 'lyudmil', user.reload.nickname
   end
   
   it "should have many deals" do
