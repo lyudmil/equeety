@@ -35,14 +35,14 @@ describe OffersController do
       post 'create', :nickname => 'lyudmil', :deal => deal_parameters
     end
     
-    it "should redirect to home page if save successful" do
+    it "should redirect to home page if all saves are successful" do
       @deal.should_receive(:save).and_return(true)
       
       post 'create', :nickname => 'lyudmil', :deal => deal_parameters
       response.should redirect_to root_path
     end
     
-    it "should render the new template again if save not successful" do
+    it "should render the new template again if deal could not be saved" do
       @deal.should_receive(:save).and_return(false)
       
       post 'create', :nickname => 'lyudmil', :deal => deal_parameters
