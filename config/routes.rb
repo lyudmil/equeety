@@ -11,6 +11,7 @@ Equeety::Application.routes.draw do
     resources :invitations, :only => [:new, :create]
   end
   
+  match "/offers/:nickname" => 'offers#new'
   root :to => 'static_pages#home'
   # The priority is based upon order of creation:
   # first created -> highest priority.
