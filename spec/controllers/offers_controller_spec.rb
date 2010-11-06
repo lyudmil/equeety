@@ -16,8 +16,7 @@ describe OffersController do
   
   describe "create" do
     before :each do
-      @invitation = mock_model(Invitation)
-      @invitations = mock(:build => @invitation)
+      @invitations = mock(:build => mock_model(Invitation))
       @deal.stub(:invitations).and_return(@invitations)
       @deal.stub(:save).and_return(true)
       Deal.should_receive(:new).with(deal_parameters).and_return(@deal)
