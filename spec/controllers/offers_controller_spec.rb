@@ -7,16 +7,26 @@ describe OffersController do
   
   describe "new" do
     it "should create a new deal" do
+      User.stub(:find_by_nickname).with('lyudmil').and_return(mock_model(User))
       Deal.should_receive(:new).and_return(@deal)
       
       get 'new', :nickname => 'lyudmil'
+      response.should be_success
       assigns(:deal).should == @deal
+    end
+    
+    it "should redirect to home page if no user with the given nickname exists" do
+      User.should_receive(:find_by_nickname).with('lyudmil').and_return(nil)
+      
+      get 'new', :nickname => 'lyudmil'
+      response.should redirect_to root_path
+      flash[:error].should == "The page you tried to access is not available."
     end
   end
   
   describe "create" do
     before :each do
-      @invitations = mock(:build => mock_model(Invitation))
+      @invitations = mock(:create => mock_model(Invitation))
       @deal.stub(:invitations).and_return(@invitations)
       @deal.stub(:save).and_return(true)
       Deal.should_receive(:new).with(deal_parameters).and_return(@deal)
@@ -31,7 +41,7 @@ describe OffersController do
       user = mock_model(User)
       User.stub(:find_by_nickname).with('lyudmil').and_return(user)
       
-      @invitations.should_receive(:build).with(:user => user)
+      @invitations.should_receive(:create).with(:user => user)
       post 'create', :nickname => 'lyudmil', :deal => deal_parameters
     end
     
@@ -40,6 +50,7 @@ describe OffersController do
       
       post 'create', :nickname => 'lyudmil', :deal => deal_parameters
       response.should redirect_to root_path
+      flash[:notice].should == "Thank you. Your deal proposal has been submitted."
     end
     
     it "should render the new template again if deal could not be saved" do
@@ -47,6 +58,12 @@ describe OffersController do
       
       post 'create', :nickname => 'lyudmil', :deal => deal_parameters
       response.should render_template 'new'
+    end
+    
+    it "should apply public user path filter" do
+      controller.should_receive(:require_user_public_path)
+      
+      post 'create', :nickname => 'lyudmil', :deal => deal_parameters
     end
   end
   
