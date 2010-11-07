@@ -5,16 +5,16 @@ class DashboardController < ApplicationController
   helper_method :public_invitations
   
   def index
-    @invitations = Invitation.where(:user_id => current_user)
+    @invitations = Invitation.where(:user_id => current_user, :accepted => false)
   end
   
   private
   
   def private_invitations
-    @invitations.select { |invitation| not (invitation.public? or invitation.accepted?) }
+    @invitations.select { |invitation| not invitation.public? }
   end
   
   def public_invitations
-    @invitations.select { |invitation| invitation.public? and not invitation.accepted? }
+    @invitations.select { |invitation| invitation.public? }
   end
 end
