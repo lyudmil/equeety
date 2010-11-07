@@ -14,6 +14,8 @@ Equeety::Application.routes.draw do
   get "/offers/:nickname" => 'offers#new'
   post "offers/:nickname/create" => 'offers#create'
   
+  get "/dashboard" => 'dashboard#index', :as => :dashboard
+  
   root :to => 'static_pages#home'
   # The priority is based upon order of creation:
   # first created -> highest priority.

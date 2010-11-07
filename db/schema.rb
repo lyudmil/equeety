@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20101105220520) do
     t.string   "persistence_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "budget"
+    t.decimal  "budget",            :precision => 12, :scale => 2
     t.string   "nickname"
   end
 
