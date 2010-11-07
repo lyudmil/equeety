@@ -2,10 +2,8 @@
 %ul
   - for invitation in private_invitations
     %li #{invitation.deal.startup_name}
-    = link_to "Details", deal_path(invitation.deal)
 
 %h2 Deals proposed through your public page
 %ul
   - for invitation in public_invitations
     %li #{invitation.deal.startup_name}
-    = link_to "Details", deal_path(invitation.deal)

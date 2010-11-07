@@ -11,6 +11,8 @@ Equeety::Application.routes.draw do
     resources :invitations, :only => [:new, :create]
   end
   
+  resources :invitations, :only => [:update, :destroy]
+  
   get "/offers/:nickname" => 'offers#new'
   post "offers/:nickname/create" => 'offers#create'
   
