@@ -26,7 +26,7 @@ describe OffersController do
   
   describe "create" do
     before :each do
-      @invitations = mock(:create => mock_model(Invitation))
+      @invitations = mock(:create => mock_model(Invitation, :public => nil))
       @deal.stub(:invitations).and_return(@invitations)
       @deal.stub(:save).and_return(true)
       Deal.should_receive(:new).with(deal_parameters).and_return(@deal)
@@ -41,7 +41,7 @@ describe OffersController do
       user = mock_model(User)
       User.stub(:find_by_nickname).with('lyudmil').and_return(user)
       
-      @invitations.should_receive(:create).with(:user => user)
+      @invitations.should_receive(:create).with(:user => user, :public => true)
       post 'create', :nickname => 'lyudmil', :deal => deal_parameters
     end
     

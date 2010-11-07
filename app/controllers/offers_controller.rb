@@ -8,7 +8,7 @@ class OffersController < ApplicationController
   def create
     @deal = Deal.new(params[:deal])
     if @deal.save
-      invitation = @deal.invitations.create(:user => @user)
+      invitation = @deal.invitations.create(:user => @user, :public => true)
       redirect_to root_path, :notice => "Thank you. Your deal proposal has been submitted."
     else
       render :new

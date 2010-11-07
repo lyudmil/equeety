@@ -19,6 +19,13 @@ describe Invitation do
     invitation.deal.should == deal
   end
   
+  it "should indicate if it is public or private" do
+    invitation = Invitation.new(:deal => mock_model(Deal), :user => mock_model(User), :public => true)
+    
+    invitation.save.should be_true
+    invitation.public?.should be_true
+  end
+  
   it "should always have a user" do
     assert_validates_presence_of :user
   end
@@ -36,7 +43,7 @@ describe Invitation do
     second_invitation.save.should be_false
     second_invitation.errors_on(:user_id).should == ["already knows about this deal."]
   end
-  
+    
   private
   
   def model
