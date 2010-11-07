@@ -63,7 +63,11 @@ describe DealsController do
       Deal.should_receive(:where).with(:user_id => @current_user).and_return(@deals)
       
       @deals_invited_to = [mock_model(Deal), mock_model(Deal)]
-      invitations = [Invitation.new(:deal => @deals_invited_to[0]), Invitation.new(:deal => @deals_invited_to[1])]
+      invitations = [
+        Invitation.new(:deal => @deals_invited_to[0], :accepted => true), 
+        Invitation.new(:deal => @deals_invited_to[1], :accepted => true),
+        Invitation.new(:deal => mock_model(Deal), :accepted => false)
+      ]
       @current_user.stub(:invitations).and_return(invitations)
     end
     
