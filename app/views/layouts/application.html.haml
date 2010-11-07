@@ -8,6 +8,7 @@
   %body
     #user_navigation
       - if current_user
+        = link_to "Dashboard", dashboard_url
         = link_to "Deals", deals_url
         = link_to "View profile", user_url
         = link_to "Log out", logout_url

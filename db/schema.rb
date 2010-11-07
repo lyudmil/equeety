@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101107010541) do
+ActiveRecord::Schema.define(:version => 20101107015814) do
 
   create_table "commitments", :force => true do |t|
     t.decimal  "amount",     :precision => 12, :scale => 2
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20101107010541) do
     t.integer  "user_id"
     t.integer  "deal_id"
     t.boolean  "public",     :default => false
+    t.boolean  "accepted",   :default => false
   end
 
   create_table "users", :force => true do |t|

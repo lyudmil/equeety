@@ -26,6 +26,13 @@ describe Invitation do
     invitation.public?.should be_true
   end
   
+  it "should indicate if it has been accepted" do
+    invitation = Invitation.new(:deal => mock_model(Deal), :user => mock_model(User), :accepted => true)
+
+    invitation.save.should be_true
+    invitation.accepted?.should be_true
+  end
+  
   it "should always have a user" do
     assert_validates_presence_of :user
   end
