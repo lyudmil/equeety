@@ -2,8 +2,8 @@
 %ul
   - for invitation in private_invitations
     %li #{invitation.deal.startup_name}
-    = link_to "Accept"
-    = link_to "Reject", invitation, :confirm => 'Are you sure?', :method => :delete
+    = button_to "Accept", invitation, :method => :put
+    = button_to "Reject", invitation, :confirm => 'Are you sure you want to reject this deal?', :method => :delete
 
 %h2 Deals proposed through your public page
 %ul
