@@ -3,11 +3,11 @@ require 'spec_helper'
 describe OffersController do
   before :each do
     @deal = mock_model(Deal)
+    User.stub(:find_by_nickname).with('lyudmil').and_return(mock_model(User))
   end
   
   describe "new" do
     it "should create a new deal" do
-      User.stub(:find_by_nickname).with('lyudmil').and_return(mock_model(User))
       Deal.should_receive(:new).and_return(@deal)
       
       get 'new', :nickname => 'lyudmil'
