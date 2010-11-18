@@ -7,10 +7,10 @@ class UserSessionsController < ApplicationController
     @session = UserSession.new(params[:session])
     
     if @session.save
-      redirect_to deals_url, :notice => 'You\'ve logged in successfully.'
+      redirect_to dashboard_path, :notice => 'You\'ve logged in successfully.'
     else
       flash[:error] = 'Sorry, we couldn\'t match your email and password.'
-      redirect_to login_url
+      redirect_to login_path
     end
   end
 
@@ -18,6 +18,6 @@ class UserSessionsController < ApplicationController
     @session = UserSession.find
     @session.destroy
     
-    redirect_to root_url
+    redirect_to root_path
   end
 end

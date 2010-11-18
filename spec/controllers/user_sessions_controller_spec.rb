@@ -31,11 +31,11 @@ describe UserSessionsController do
       post 'create', parameters
     end
     
-    it "should redirect to home page if login successful" do
+    it "should redirect to dahsboard if login successful" do
       @session.stub(:save).and_return(true)   
       post 'create'
       
-      response.should redirect_to :controller => 'deals', :action => 'index'
+      response.should redirect_to :controller => 'dashboard', :action => 'index'
     end
     
     it "should render the login dialog if login unsuccessful" do
