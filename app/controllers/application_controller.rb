@@ -18,14 +18,14 @@ class ApplicationController < ActionController::Base
   def require_user
     unless current_user
       store_location
-      redirect_to login_url, :notice => "You must be logged in to access this page"
+      redirect_to login_path, :notice => "You must be logged in to access this page"
       return false
     end
   end
   
   def require_no_user
     if current_user
-      redirect_to root_url, :notice => "You must be logged out to access this page"
+      redirect_to root_path, :notice => "You must be logged out to access this page"
       return false
     end
   end
@@ -33,14 +33,14 @@ class ApplicationController < ActionController::Base
   def require_user_access_to_deal key_in_params = :id
     @deal = Deal.find(params[key_in_params])
     unless current_user.has_access_to? @deal
-      redirect_to deals_url, :notice => "You don't have access to this deal and therefore can't invest in it."
+      redirect_to deals_path, :notice => "You don't have access to this deal and therefore can't invest in it."
     end
   end
   
   def require_user_ownership_of_deal
     @deal = Deal.find(params[:id])
     unless current_user.owns? @deal
-      redirect_to deals_url, :notice => "You need to own this deal to edit it."
+      redirect_to deals_path, :notice => "You need to own this deal to edit it."
     end
   end
 

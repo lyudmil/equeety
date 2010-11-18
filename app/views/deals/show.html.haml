@@ -21,9 +21,9 @@
   %ul
     - for commitment in @deal.commitments
       %li #{number_to_currency(commitment.amount, :unit => "$")} (#{commitment.user.email})
-      = link_to "Edit", edit_deal_commitment_url(@deal, commitment)
+      = link_to "Edit", edit_deal_commitment_path(@deal, commitment)
 
 - unless current_user.has_invested_in?(@deal)
-  =link_to "Invest in this deal", new_deal_commitment_url(@deal)
-=link_to "Invite others to invest", new_deal_invitation_url(@deal)
-=link_to "Back to deals", deals_url
+  =link_to "Invest in this deal", new_deal_commitment_path(@deal)
+=link_to "Invite others to invest", new_deal_invitation_path(@deal)
+=link_to "Back to deals", deals_path

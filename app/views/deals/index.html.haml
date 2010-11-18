@@ -1,6 +1,6 @@
 %h1 My Deals
 %div
-  = link_to "New deal", new_deal_url
+  = link_to "New deal", new_deal_path
 %div
   %h2 Your deals:
   %ul
@@ -23,7 +23,7 @@
         .round
           %strong Round:
           = deal.round
-        = link_to "Edit", edit_deal_url(deal)
+        = link_to "Edit", edit_deal_path(deal)
         = link_to "Details", deal
 
 %div

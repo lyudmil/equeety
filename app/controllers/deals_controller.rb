@@ -22,7 +22,7 @@ class DealsController < ApplicationController
   def update
     @deal = Deal.find(params[:id])
     if @deal.update_attributes(params[:deal])
-      redirect_to deals_url
+      redirect_to deals_path
     else
       render :action => 'edit'
     end

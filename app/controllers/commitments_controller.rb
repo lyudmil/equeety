@@ -38,7 +38,7 @@ class CommitmentsController < ApplicationController
   def require_user_access_to_commitment
     @commitment = @deal.commitments.find(params[:id])
     unless @commitment.user == current_user
-      redirect_to deals_url, :notice => "You are not the original investor and therefore can't edit this investment."
+      redirect_to deals_path, :notice => "You are not the original investor and therefore can't edit this investment."
     end
   end
   

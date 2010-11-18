@@ -5,7 +5,7 @@ describe ApplicationController do
   describe "require user filter" do
     it "should fail and redirect if no user" do
       user_logged_out
-      controller.should_receive(:redirect_to).with(login_url, {:notice => "You must be logged in to access this page"}).and_return(nil)
+      controller.should_receive(:redirect_to).with(login_path, {:notice => "You must be logged in to access this page"}).and_return(nil)
       controller.send(:require_user).should == false
     end
     
@@ -19,7 +19,7 @@ describe ApplicationController do
   describe "require no user filter" do
     it "should fail and redirect if user logged in" do
       user_logged_in
-      controller.should_receive(:redirect_to).with(root_url, {:notice => "You must be logged out to access this page"}).and_return(nil)
+      controller.should_receive(:redirect_to).with(root_path, {:notice => "You must be logged out to access this page"}).and_return(nil)
       controller.send(:require_no_user).should == false
     end
     
