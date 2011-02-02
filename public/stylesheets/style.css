@@ -1,0 +1,486 @@
+
+h1, h2, h3, h4, h5, h6, ul, ol, li, form, p, filedset, img {
+   margin:0;
+   padding:0;
+   border:0;
+   font-weight:normal;
+}
+
+form, fieldset {
+   margin:0;
+   padding:0;
+   border:none;
+}
+
+:focus {
+   outline:none;
+}
+
+img {
+   border:0;
+}
+
+body, html {
+   margin:0;
+   padding:0;
+}
+
+body {
+   font-family:Arial, Helvetica, sans-serif;
+   color:#3d3d3f;
+   font-size:9px;
+   background:url(../images/body_bg1.jpg) repeat-x 0 0;
+}
+
+a {
+   outline:none;
+}
+
+.clear {
+   clear:both;
+}
+
+#outer_wrapper {
+   float:left;
+   width:100%
+}
+
+#wrapper {
+   margin:0 auto;
+   width:962px;
+}
+
+#header {
+   float:left;
+   width:100%;
+   margin-bottom:31px;
+}
+
+#header .logo_section {
+   float:left;
+   width:158px;
+}
+
+#header .logo_section h1 {
+   float:left;
+   width:auto;
+}
+
+#header .logo_section h1 a {
+   float:left;
+   width:auto;
+}
+
+#header .logo_section h1 a img {
+   float:left;
+   width:auto;
+   margin:20px 0px 0px 0px;
+}
+
+#navigation {
+   float:left;
+   width:550px;
+   padding:14px 0 11px;
+}
+
+#navigation ul {
+   float:left;
+   width:auto;
+   list-style:none;
+}
+
+#navigation ul li {
+   float:left;
+   width:auto;
+   background:url(../images/navi_left.gif) no-repeat 0 0;
+   padding:0px 12px 0px 5px;
+}
+
+#navigation ul li span {
+   float:left;
+   width:auto;
+   background:url(../images/navi_right.gif) no-repeat right 0;
+   padding:8px 16px 5px 6px;
+   cursor:pointer;
+}
+
+#navigation ul li span a {
+   float:left;
+   width:auto;
+   color:#FFF;
+   text-decoration:none;
+}
+
+#navigation ul li span a img {
+   float:left;
+   width:auto;
+   margin-right:9px;
+   display:inline;
+}
+
+#navigation ul li span a {
+   float:left;
+   width:auto;
+   font:bold 16px/22px Arial, Helvetica, sans-serif;
+   padding-top:3px;
+   cursor:pointer;
+}
+
+
+#user_detail_section {
+   float:right;
+   width:189px;
+   padding-top:22px;
+}
+
+#user_detail_section img {
+   float:left;
+}
+
+#user_detail_section span {
+   float:left;
+   width:150px;
+   padding:0 9px 0 0;
+   font:14px Arial, Helvetica, sans-serif;
+   color:#ffffff;
+}
+
+#user_detail_section span .profile{
+   float:left;
+   width:auto;
+   background:url(../images/small01.jpg) no-repeat 0 7px;
+   font:13px Arial, Helvetica, sans-serif;
+   color:#000;
+   padding:4px 18px 0px 14px;
+}
+
+#user_detail_section span a {
+   float:left;
+   width:auto;
+   font:bold 13px Arial, Helvetica, sans-serif;
+   color:#000;
+   text-decoration:none;
+   padding:4px 0 0;
+}
+
+#page {
+   float:left;
+   width:962px;
+   padding-bottom:28px;
+}
+
+#left_section {
+   float:left;
+   width:632px;
+   background:url(../images/page_bg.jpg) repeat-y 0 0;
+}
+
+#inner_left_section {
+   float:left;
+   width:632px;
+   background:url(../images/left_section_bottom_curve.jpg) no-repeat 0 bottom;
+}
+
+.mydeal_bg h4 {
+   float:left;
+   width:auto;
+   font:bold 20px/22px Arial, Helvetica, sans-serif;
+   color:#333333;
+   padding:9px 0px 0px 15px
+}
+
+.mydeal_bg {
+   float:left;
+   width:100%;
+   background:url(../images/mydeal_bg.gif) repeat-x 0 0;
+   height:40px;
+}
+
+.mydeal_left_curve {
+   float:left;
+   width:100%;
+   background:url(../images/mydeal_left_curve.gif) no-repeat 0 0;
+   height:40px
+}
+
+.mydeal_right_curve {
+   float:left;
+   width:100%;
+   background:url(../images/mydeal_right_curve.gif) no-repeat right 0;
+   height:40px;
+}
+
+.left_section_content {
+   float:left;
+   width:611px;
+   padding:10px 11px 13px 10px;
+}
+
+.common_section_bg {
+   float:left;
+   width:100%;
+   background:url(../images/common_section_bg.jpg) repeat-y 0 0;
+   margin-bottom:11px;
+}
+
+.common_section_top_cuve {
+   float:left;
+   width:100%;
+   background:url(../images/common_section_top_curve.jpg) no-repeat 0 0;
+}
+
+.common_section_bottom_cuve {
+   float:left;
+   width:100%;
+   background:url(../images/common_section_bottom_curve.jpg) no-repeat 0 bottom;
+   min-height:148px;
+   height:auto !important;
+   height:148px;
+}
+
+.common_section_content {
+   float:left;
+   width:609px;
+   padding:10px 0px 13px 0px;
+}
+
+.common_section_content img.new {
+   float:left;
+   width:auto;
+}
+
+.common_section_content h3 {
+   float:left;
+   width:auto;
+   font:bold 24px Arial, Helvetica, sans-serif;
+   color:#000000;
+   padding-left:19px;
+}
+
+.common_section_content strong {
+   float:right;
+   width:auto;
+   background:url(../images/viewmore.gif) no-repeat 0 0;
+   height:28px;
+   margin-right:1px;
+   display:inline;
+}
+
+.common_section_content strong a {
+   float:left;
+   width:auto;
+   font:bold 18px Arial, Helvetica, sans-serif;
+   color:#676767;
+   text-decoration:none;
+   padding:4px 16px 0px 12px;
+}
+
+.common_section_content p {
+   float:left;
+   width:572px;
+   font:13px/19px Arial, Helvetica, sans-serif;
+   color:#292929;
+   border-bottom:1px solid #c6c6c6;
+   margin:0px 24px 0px 13px;
+   display:inline;
+   padding:11px 0px;
+}
+
+.common_section_content span {
+   float:left;
+   width:252px;
+   font:12px Arial, Helvetica, sans-serif;
+   color:#4d4d4d;
+   padding:10px 0px 0px 15px;
+}
+
+.load_detail_bg {
+   float:left;
+   width:100%;
+   background:url(../images/load_detail_bg.jpg) repeat-x 0 0;
+   height:47px;
+}
+
+.load_detail_left_curve {
+   float:left;
+   width:100%;
+   background:url(../images/load_detail_left_curve.jpg) no-repeat 0 0;
+   height:47px;
+}
+
+.load_detail_right_curve {
+   float:left;
+   width:100%;
+   background:url(../images/load_detail_right_curve.jpg) no-repeat right 0;
+   height:47px;
+}
+
+.load_detail_bg a {
+   float:left;
+   width:100%;
+   background:url(../images/small02.jpg) no-repeat 210px 11px;
+   text-align:center;
+   font:18px/22px Arial, Helvetica, sans-serif;
+   color:#FFF;
+   text-decoration:none;
+   padding:10px 0px 0px 0px;
+   height:39px;
+}
+
+#sidebar {
+   float:right;
+   width:312px;
+}
+
+.add_detail_bg {
+   float:left;
+   width:100%;
+   background:url(../images/add_detail_bg.jpg) repeat-x 0 0;
+   height:42px;
+   margin-bottom:21px;
+}
+
+.add_detail_left_curve {
+   float:left;
+   width:100%;
+   background:url(../images/add_detail_left_curve.jpg) no-repeat 0 0;
+   height:42px;
+}
+
+.add_detail_right_curve {
+   float:left;
+   width:100%;
+   background:url(../images/add_detail_right_curve.jpg) no-repeat right 0;
+   height:42px;
+}
+
+.add_detail_bg a {
+   float:left;
+   width:100%;
+   background:url(../images/small03.jpg) no-repeat 85px 11px;
+   text-align:center;
+   font:18px/22px Arial, Helvetica, sans-serif;
+   color:#FFF;
+   text-decoration:none;
+   padding:10px 0px 0px 0px;
+   height:32px;
+}
+
+.deal_section {
+   float:left;
+   width:100%
+}
+
+.deal_section img {
+   float:left;
+}
+
+.deal_section .deals_bg {
+   float:left;
+   width:100%;
+   background:url(../images/deals_bg.gif) repeat-y 0 0;
+}
+
+.deal_section .deals_bottom_curve {
+   float:left;
+   width:100%;
+   background:url(../images/deals_bottom_curve.gif) no-repeat 0 bottom;
+}
+
+.common_section2 {
+   float:left;
+   width:288px;
+   padding:8px 8px 12px 8px;
+}
+
+.common_section2_bg {
+   float:left;
+   width:100%;
+   background:url(../images/common_section2_bg.jpg) repeat-y 0 0;
+   margin-bottom:11px;
+}
+
+.common_section2_top_curve {
+   float:left;
+   width:100%;
+   background:url(../images/common_section2_top_curve.jpg) no-repeat 0 0;
+}
+
+.common_section2_bottom_curve {
+   float:left;
+   width:100%;
+   background:url(../images/common_section2_bottom_curve.jpg) no-repeat 0 bottom;
+   min-height:39px;
+   height:auto !important;
+   height:39px;
+}
+
+.common_section2 span {
+   float:left;
+   width:174px;
+   font:bold 17px/20px Arial, Helvetica, sans-serif;
+   color:#333333;
+   padding:8px 0px 0px 10px;
+   color:#333333;
+}
+
+.common_section2 small {
+   float:right;
+   width:80px;
+   font:bold 17px/20px Arial, Helvetica, sans-serif;
+   color:#333333;
+   text-align:right;
+   padding:8px 12px 0px 10px;
+}
+
+.total_deal_bg {
+   float:left;
+   width:100%;
+   background:url(../images/total_deal_bg.jpg) repeat-y 0 0;
+}
+
+.total_deal_top_curve {
+   float:left;
+   width:100%;
+   background:url(../images/total_deal_top_curve.jpg) no-repeat 0 0;
+}
+
+.total_deal_botttom_curve {
+   float:left;
+   width:100%;
+   background:url(../images/total_deal_bottom_curve.jpg) no-repeat 0 bottom;
+   min-height:39px;
+   height:auto !important;
+   height:39px;
+}
+
+.total_deal_botttom_curve span {
+   float:left;
+   color:#d0dae1;
+}
+
+.total_deal_botttom_curve small {
+   float:right;
+   color:#d0dae1;
+   text-align:right;
+}
+
+#footer {
+   float:left;
+   width:100%;
+   background:url(../images/footer_border.jpg) repeat-x 0 top;
+   padding-top:9px;
+}
+
+#footer span {
+   float:left;
+   width:100%;
+   font:14px/20px Arial, Helvetica, sans-serif;
+}
+
+#footer span a {
+   color:#000;
+   text-decoration:none;
+   padding-left:4px;
+   font-weight:bold;
+}
