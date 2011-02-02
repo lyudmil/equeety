@@ -98,6 +98,13 @@ describe Deal do
     deal.save.should be_true
   end
   
+  it "should have a status" do
+    deal = Deal.new(valid_fields.merge(:status => 'due_diligence'))
+    
+    deal.save.should be_true
+    deal.reload.status.should == 'due_diligence'
+  end
+  
   private
   
   def model
