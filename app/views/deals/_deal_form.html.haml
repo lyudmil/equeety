@@ -41,6 +41,10 @@
     = f.label :round
     %br/
     = f.select :round, round_options
+  .filed
+    = f.label :status
+    %br
+    = f.select :status, status_options.collect { |option| [option.humanize.capitalize, option] }
   
   .actions
     = f.submit

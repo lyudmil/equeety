@@ -168,7 +168,8 @@ describe DealsController do
       'contact_name' => 'stefano',
       'contact_email' => 'me@email.com',
       'required_amount' => '111', 
-      'proposed_valuation' => '222'
+      'proposed_valuation' => '222',
+      'status' => 'new'
     }
   end
 end
