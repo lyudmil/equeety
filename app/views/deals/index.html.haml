@@ -1,51 +1,84 @@
-%h1 My Deals
-%div
-  = link_to "New deal", new_deal_path
-%div
-  %h2 Your deals:
-  %ul
-    - for deal in @deals
-      %li
-        .logo= image_tag(deal.logo_url) if deal.logo_url?
-        .name= link_to_if deal.website?, sanitize(deal.startup_name), sanitize(deal.website)
-        .contact
-          %strong Contact:
-          %span.name= mail_to deal.contact_name, deal.contact_email
-        .required_amount
-          %strong Required:
-          #{number_to_currency(deal.required_amount, :unit => "$")}
-        .proposed_valuation
-          %strong Proposed valuation:
-          #{number_to_currency(deal.proposed_valuation, :unit => "$")}
-        .closing_date
-          %strong Closing date:
-          = deal.closing_date? ? deal.closing_date : :none
-        .round
-          %strong Round:
-          = deal.round
-        = link_to "Edit", edit_deal_path(deal)
-        = link_to "Details", deal
+#left_section
+  #inner_left_section
+    .mydeal_bg
+      .mydeal_left_curve
+        .mydeal_right_curve
+          %h4 My Deals    
+    .left_section_content
+      - for deal in @deals
+        .common_section_bg
+          .common_section_top_cuve
+            .common_section_bottom_cuve
+              .common_section_content              
+                = link_to image_tag('/images/new.gif', :class => "new"), "#"
+                %h3
+                  = deal.startup_name
+                %strong
+                  = link_to 'View More', deal
+                %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                %p We can write wathever we want here (date, amount, invited_by etc..)
 
-%div
-  %h2 Deals by other investors:
-  %ul
-    - for deal in @deals_invited_to
-      %li
-        .logo= image_tag(deal.logo_url) if deal.logo_url?
-        .name= link_to_if deal.website?, sanitize(deal.startup_name), sanitize(deal.website)
-        .contact
-          %strong Contact:
-          %span.name= mail_to deal.contact_name, deal.contact_email
-        .required_amount
-          %strong Required:
-          #{number_to_currency(deal.required_amount, :unit => "$")}
-        .proposed_valuation
-          %strong Proposed valuation:
-          #{number_to_currency(deal.proposed_valuation, :unit => "$")}
-        .closing_date
-          %strong Closing date:
-          = deal.closing_date? ? deal.closing_date : :none
-        .round
-          %strong Round:
-          = deal.round
-        = link_to "Details", deal
+      - for deal in @deals_invited_to
+        .common_section_bg
+          .common_section_top_cuve
+            .common_section_bottom_cuve
+              .common_section_content
+                = link_to image_tag('/images/new.gif', :class => "new"), "#"
+                %h3
+                  = deal.startup_name
+                %strong
+                  = link_to 'View More', deal
+                %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                %p We can write wathever we want here (date, amount, invited_by etc..
+
+      /.load_detail_bg
+      /  .load_detail_left_curve
+      /    .load_detail_right_curve
+          
+
+#sidebar
+  .add_detail_bg
+    .add_detail_left_curve
+      .add_detail_right_curve
+        = link_to "Add a deal", new_deal_path
+
+  .deal_section
+    .mydeal_bg
+      .mydeal_left_curve
+        .mydeal_right_curve
+          %h4 Deals
+
+    .deals_bg
+      .deals_bottom_curve
+        .common_section2
+          .common_section2_bg
+            .common_section2_top_curve
+              .common_section2_bottom_curve
+                %span New:
+                %small 3
+          
+          .common_section2_bg
+            .common_section2_top_curve
+              .common_section2_bottom_curve
+                %span In Due Diligence:
+                %small 5
+          
+          .common_section2_bg
+            .common_section2_top_curve
+              .common_section2_bottom_curve
+                %span Pending:
+                %small 2
+            
+          
+          .common_section2_bg
+            .common_section2_top_curve
+              .common_section2_bottom_curve
+                %span Received this month:
+                %small 128
+            
+          
+          .total_deal_bg
+            .total_deal_top_curve
+              .total_deal_botttom_curve
+                %span Total Dealflow:
+                %small 263
