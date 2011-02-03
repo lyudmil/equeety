@@ -10,7 +10,7 @@
           .common_section_top_cuve
             .common_section_bottom_cuve
               .common_section_content              
-                = link_to image_tag('/images/new.gif', :class => "new"), "#"
+                = link_to image_tag(status_image_for(deal), :class => "new"), "#"
                 %h3
                   = deal.startup_name
                 %strong
