@@ -15,7 +15,8 @@
                   = deal.startup_name
                 %strong
                   = link_to 'View More', deal
-                %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                %p 
+                  = deal.description
                 %p We can write wathever we want here (date, amount, invited_by etc..)
 
       - for deal in @deals_invited_to

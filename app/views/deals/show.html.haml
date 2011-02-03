@@ -16,6 +16,12 @@
 .round
   %strong Round:
   = @deal.round
+.status
+  %strong Status:
+  = @deal.status.humanize.capitalize
+.description
+  %strong Description:
+  = @deal.description
 .commitments
   %strong Commitments by investors
   %ul

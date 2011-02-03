@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110202204918) do
+ActiveRecord::Schema.define(:version => 20110203033505) do
 
   create_table "commitments", :force => true do |t|
     t.decimal  "amount",     :precision => 12, :scale => 2
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20110202204918) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "status"
+    t.text     "description"
   end
 
   create_table "invitations", :force => true do |t|

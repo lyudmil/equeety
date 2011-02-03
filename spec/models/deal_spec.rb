@@ -105,6 +105,13 @@ describe Deal do
     deal.reload.status.should == 'due_diligence'
   end
   
+  it "should have a description" do
+    deal = Deal.new(valid_fields.merge(:description => 'Something here to explain the deal'))
+    
+    deal.save.should be_true
+    deal.reload.description.should == 'Something here to explain the deal'
+  end
+  
   private
   
   def model
