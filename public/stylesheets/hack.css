@@ -1,6 +1,14 @@
-
 #navigation ul li span a {
-   text-shadow:1px 0px 1px #bfced7;
+   text-shadow:1px 0px 1px #157fc3;
+}
+
+#navigation ul li span a:hover {
+   text-shadow:1px 1px 1px #333;
+}
+
+
+.add_detail_bg a:hover {
+  text-shadow:1px 1px 1px #333;
 }
 
 #user_detail_section span {
@@ -19,12 +27,22 @@
    text-shadow:1px 1px 1px #ffffff;
 }
 
+
+.common_section_content strong a:hover {
+   text-shadow:none;
+}
+
+
 #user_detail_section span small {
    text-shadow:2px 2px 2px #157fc3;
 }
 
 #user_detail_section span a {
-   text-shadow:1px 2px 0px #157fc3;
+   text-shadow:none;
+}
+
+#user_detail_section span a:hover {
+   text-shadow:1px 1px 0px #157fc3;
 }
 
 .load_detail_bg a {
@@ -44,11 +62,11 @@
 }
 
 .total_deal_botttom_curve span {
-   text-shadow:1px 1px 2px #86aac1;
+   text-shadow:1px 1px 1px #86aac1;
 }
 
 .total_deal_botttom_curve small {
-   text-shadow:1px 1px 2px #86aac1;
+   text-shadow:1px 1px 1px #86aac1;
 }
 
 #footer span {

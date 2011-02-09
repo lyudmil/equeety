@@ -5,9 +5,9 @@
         .mydeal_right_curve
           %h4 My Deals    
     .left_section_content
+
       = render :partial => 'deal_list', :locals => { :deals => @deals }
-      = render :partial => 'deal_list', :locals => { :deals => @deals_invited_to }
-          
+      = render :partial => 'deal_list', :locals => { :deals => @deals_invited_to }          
 
 #sidebar
   .add_detail_bg
@@ -30,7 +30,7 @@
                 %span New:
                 %small 
                   = @new_deals_count
-          
+
           .common_section2_bg
             .common_section2_top_curve
               .common_section2_bottom_curve
@@ -44,18 +44,18 @@
                 %span Pending:
                 %small
                   = @pending_deals_count
-            
           
           .common_section2_bg
             .common_section2_top_curve
               .common_section2_bottom_curve
                 %span Received this month:
-                %small 128
+                %small
+                  1
             
           
           .total_deal_bg
             .total_deal_top_curve
               .total_deal_botttom_curve
-                %span Total Dealflow:
+                %span Total Deals:
                 %small
                   = @new_deals_count + @due_diligence_deals_count + @pending_deals_count

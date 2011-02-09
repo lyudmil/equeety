@@ -1,5 +1,5 @@
 %h1 #{@deal.startup_name}
-.logo= image_tag(@deal.logo_url, :id => 'logo_image', :class => 'logo_img') if @deal.logo_url?
+.logo= image_tag(@deal.logo_url, :class => 'logo_img') if @deal.logo_url?
 .name= link_to_if @deal.website?, sanitize(@deal.startup_name), sanitize(@deal.website)
 .contact
   %strong Contact:

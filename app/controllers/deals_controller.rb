@@ -37,6 +37,7 @@ class DealsController < ApplicationController
     @deals_invited_to = accepted_invitations.collect { |invite| invite.deal }
     
     @all_deals = @deals + @deals_invited_to
+    
     @new_deals_count = count_deals_with_status 'new'
     @due_diligence_deals_count = count_deals_with_status 'due_diligence'
     @pending_deals_count = count_deals_with_status 'pending'
