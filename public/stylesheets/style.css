@@ -495,3 +495,16 @@ a {
    padding-left:4px;
    font-weight:bold;
 }
+
+
+#progress-bar {
+   background: url(../images/percentage-bg.png) no-repeat left center;
+   width: 626px;
+   height: 56px;
+   margin: 0 auto;
+   margin-left: -5px;
+	}
+#progress-level {
+   background: url(../images/progress.png) no-repeat left center;
+   height: 56px;
+	}
