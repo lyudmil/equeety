@@ -5,36 +5,8 @@
         .mydeal_right_curve
           %h4 My Deals    
     .left_section_content
-      - for deal in @deals
-        .common_section_bg
-          .common_section_top_cuve
-            .common_section_bottom_cuve
-              .common_section_content              
-                = link_to image_tag(status_image_for(deal), :class => "new"), "#"
-                %h3
-                  = deal.startup_name
-                %strong
-                  = link_to 'View More', deal
-                %p 
-                  = deal.description
-                %p We can write wathever we want here (date, amount, invited_by etc..)
-
-      - for deal in @deals_invited_to
-        .common_section_bg
-          .common_section_top_cuve
-            .common_section_bottom_cuve
-              .common_section_content
-                = link_to image_tag('/images/new.gif', :class => "new"), "#"
-                %h3
-                  = deal.startup_name
-                %strong
-                  = link_to 'View More', deal
-                %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                %p We can write wathever we want here (date, amount, invited_by etc..
-
-      /.load_detail_bg
-      /  .load_detail_left_curve
-      /    .load_detail_right_curve
+      = render :partial => 'deal_list', :locals => { :deals => @deals }
+      = render :partial => 'deal_list', :locals => { :deals => @deals_invited_to }
           
 
 #sidebar
@@ -56,19 +28,22 @@
             .common_section2_top_curve
               .common_section2_bottom_curve
                 %span New:
-                %small 3
+                %small 
+                  = @new_deals_count
           
           .common_section2_bg
             .common_section2_top_curve
               .common_section2_bottom_curve
                 %span In Due Diligence:
-                %small 5
+                %small
+                  = @due_diligence_deals_count
           
           .common_section2_bg
             .common_section2_top_curve
               .common_section2_bottom_curve
                 %span Pending:
-                %small 2
+                %small
+                  = @pending_deals_count
             
           
           .common_section2_bg
@@ -82,4 +57,5 @@
             .total_deal_top_curve
               .total_deal_botttom_curve
                 %span Total Dealflow:
-                %small 263
+                %small
+                  = @new_deals_count + @due_diligence_deals_count + @pending_deals_count

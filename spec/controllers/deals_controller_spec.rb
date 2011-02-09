@@ -59,13 +59,23 @@ describe DealsController do
 
   describe "index" do
     before do
-      @deals = [mock_model(Deal), mock_model(Deal)]
+      @deals = [
+        mock_model(Deal, :status => 'new'), 
+        mock_model(Deal, :status => 'due_diligence'),
+        mock_model(Deal, :status => 'pending')
+      ]
       Deal.should_receive(:where).with(:user_id => @current_user).and_return(@deals)
       
-      @deals_invited_to = [mock_model(Deal), mock_model(Deal)]
+      @deals_invited_to = [
+        mock_model(Deal, :status => 'new'), 
+        mock_model(Deal, :status => 'due_diligence'),
+        mock_model(Deal, :status => 'pending')
+      ]
+      
       invitations = [
         Invitation.new(:deal => @deals_invited_to[0], :accepted => true), 
         Invitation.new(:deal => @deals_invited_to[1], :accepted => true),
+        Invitation.new(:deal => @deals_invited_to[2], :accepted => true),
         Invitation.new(:deal => mock_model(Deal), :accepted => false)
       ]
       @current_user.stub(:invitations).and_return(invitations)
@@ -73,11 +83,13 @@ describe DealsController do
     
     it "should be successful" do
       get 'index'
+      
       response.should be_success
     end
     
     it "should find all deals owned by the current user" do
       get 'index' 
+      
       assigns(:deals).should == @deals
     end
     
@@ -86,6 +98,25 @@ describe DealsController do
       
       assigns(:deals_invited_to).should == @deals_invited_to
     end
+    
+    it "should calculate the number of new deals" do
+      get 'index'
+      
+      assigns(:new_deals_count).should == 2
+    end
+    
+    it "should calculate the number of due diligence deals" do
+      get 'index'
+      
+      assigns(:due_diligence_deals_count).should == 2
+    end
+    
+    it "should calculate the number of pending deals" do
+      get 'index'
+      
+      assigns(:pending_deals_count).should == 2
+    end
+    
   end
   
   describe "edit" do

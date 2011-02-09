@@ -1,0 +1,13 @@
+- for deal in deals
+  .common_section_bg
+    .common_section_top_cuve
+      .common_section_bottom_cuve
+        .common_section_content              
+          = link_to image_tag(status_image_for(deal), :class => "new"), "#"
+          %h3
+            = deal.startup_name
+          %strong
+            = link_to 'View More', deal
+          %p 
+            = deal.description
+          %p We can write whatever we want here (date, amount, invited by etc.)
