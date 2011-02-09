@@ -96,6 +96,9 @@ a {
    padding:0px 12px 0px 5px;
 }
 
+#navigation ul li:hover {
+}
+
 #navigation ul li span {
    float:left;
    width:auto;
@@ -104,28 +107,30 @@ a {
    cursor:pointer;
 }
 
+
+#navigation ul li span:hover {
+}
+
 #navigation ul li span a {
    float:left;
    width:auto;
    color:#FFF;
    text-decoration:none;
+   font:bold 16px Arial, Helvetica, sans-serif;
+   padding-top:5px;
+   cursor:pointer;   
+}
+
+#navigation ul li span a:hover {
 }
 
 #navigation ul li span a img {
    float:left;
    width:auto;
    margin-right:9px;
+   margin-top: -5px;
    display:inline;
 }
-
-#navigation ul li span a {
-   float:left;
-   width:auto;
-   font:bold 16px/22px Arial, Helvetica, sans-serif;
-   padding-top:3px;
-   cursor:pointer;
-}
-
 
 #user_detail_section {
    float:right;
@@ -244,17 +249,22 @@ a {
    padding:10px 0px 13px 0px;
 }
 
-.common_section_content img.new {
+.common_section_content img {
    float:left;
    width:auto;
 }
 
-.common_section_content h3 {
+.common_section_content a {
    float:left;
    width:auto;
    font:bold 24px Arial, Helvetica, sans-serif;
-   color:#000000;
+   color:#333;
    padding-left:19px;
+   text-decoration:none;
+}
+
+.common_section_content a:hover {
+  text-decoration: underline;
 }
 
 .common_section_content strong {
@@ -366,6 +376,7 @@ a {
    height:32px;
 }
 
+
 .deal_section {
    float:left;
    width:100%
@@ -456,12 +467,12 @@ a {
 
 .total_deal_botttom_curve span {
    float:left;
-   color:#d0dae1;
+   color:#333;
 }
 
 .total_deal_botttom_curve small {
    float:right;
-   color:#d0dae1;
+   color:#333;
    text-align:right;
 }
 

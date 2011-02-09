@@ -35,6 +35,11 @@ class DealsController < ApplicationController
     @deals = Deal.where(:user_id => current_user)
     accepted_invitations = current_user.invitations.select { |invite| invite.accepted? }
     @deals_invited_to = accepted_invitations.collect { |invite| invite.deal }
+
+    #@newdeals = @deals.where(:status => 'new').count
+    #@dddeals = Deal.where(:status => 'due_diligence').count
+    #@pendingdeals = Deal.where(:status => 'pending').count
+    #@totaldeals = Deal.count
   end
   
   private

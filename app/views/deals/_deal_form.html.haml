@@ -44,7 +44,7 @@
   .field
     = f.label :status
     %br
-    = f.select :status, status_options.collect { |option| [option.humanize.capitalize, option] }
+    = f.select :status, status_options.collect { |option| [option.humanize.titlecase, option] }
   .field
     = f.label :description
     %br
