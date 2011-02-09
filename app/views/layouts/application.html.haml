@@ -27,7 +27,7 @@
               Hello,&nbsp;Stefano&nbsp;Bernardi.
               = link_to "Profile", user_path, :class => "profile"
               = link_to "Log out", logout_path
-            %img{:src => "images/user_img.jpg", :alt => "user"}
+            %img{:src => "/images/user_img.jpg", :alt => "user"}
             - unless current_user
               = link_to "Sign up", new_user_path
               = link_to "Log in", login_path
