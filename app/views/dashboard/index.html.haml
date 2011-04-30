@@ -6,8 +6,9 @@
           %h4 Fund Status
     .left_section_content
       #progress-bar
-        #progress-level{:style=>"width:60%"}
-
+        #progress-level{:style => "width:" + remaining_budget_percentage.to_s + "%"}
+        #progress-label
+          = remaining_budget_percentage.to_s + "% of " + number_to_currency(current_user.budget, :units => "$") + " remaining." 
 
 #left_section
   #inner_left_section
@@ -18,7 +19,8 @@
     .left_section_content
       %ul
         - for invitation in private_invitations
-          %li #{invitation.deal.startup_name}
+          %li
+          = link_to(invitation.deal.startup_name, invitation.deal)
           = button_to "Accept", invitation, :method => :put
           = button_to "Reject", invitation, :confirm => 'Are you sure you want to reject this deal?', :method => :delete
 
