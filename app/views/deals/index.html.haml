@@ -5,6 +5,8 @@
         .mydeal_right_curve
           %h4 My Deals    
     .left_section_content
+      - if @deals.empty? and @deals_invited_to.empty?
+        %p You have no deals yet. You can add a new one the "Add a deal" button on the right.
 
       = render :partial => 'deal_list', :locals => { :deals => @deals }
       = render :partial => 'deal_list', :locals => { :deals => @deals_invited_to }          

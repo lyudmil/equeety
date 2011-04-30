@@ -6,10 +6,6 @@ h1, h2, h3, h4, h5, h6, ul, ol, li, form, p, filedset, img {
    font-weight:normal;
 }
 
-img.gravatar {
-	border: 2px solid #fff;
-}
-
 form, fieldset {
    margin:0;
    padding:0;
@@ -24,16 +20,19 @@ img {
    border:0;
 }
 
+img.gravatar {
+	border: 2px solid #fff;
+}
+
 body, html {
    margin:0;
    padding:0;
 }
 
 body {
-   font-family:Arial, Helvetica, sans-serif;
-   color:#3d3d3f;
-   font-size:9px;
-   background:url(../images/body_bg1.jpg) repeat-x 0 0;
+	font:13px/19px Arial, Helvetica, sans-serif;
+	color:#292929;
+   	background:url(../images/body_bg1.jpg) repeat-x 0 0;
 }
 
 a {
@@ -292,8 +291,6 @@ a {
 .common_section_content p {
    float:left;
    width:572px;
-   font:13px/19px Arial, Helvetica, sans-serif;
-   color:#292929;
    border-bottom:1px solid #c6c6c6;
    margin:0px 24px 0px 13px;
    display:inline;
