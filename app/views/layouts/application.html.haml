@@ -23,14 +23,18 @@
                   %span
                     = link_to image_tag('nav_02.gif') + "Deals", deals_path
           #user_detail_section
-            %span
-              Hello,&nbsp;Stefano&nbsp;Bernardi.
-              = link_to "Profile", user_path, :class => "profile"
-              = link_to "Log out", logout_path
-            %img{:src => "/images/user_img.jpg", :alt => "user"}
-            - unless current_user
-              = link_to "Sign up", new_user_path
-              = link_to "Log in", login_path
+            - if current_user
+              %span
+                = current_user.email
+                = link_to "Profile", user_path, :class => "profile"
+                = link_to "Log out", logout_path
+              %img{:src => "/images/user_img.jpg", :alt => "user"}
+
+            - else
+              %span
+                = link_to "Sign up", new_user_path
+              %span
+                = link_to "Log in", login_path
           #notice
             = flash[:notice]
           #error
