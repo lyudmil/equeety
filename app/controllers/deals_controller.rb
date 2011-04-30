@@ -33,7 +33,8 @@ class DealsController < ApplicationController
   
   def index
     @deals = Deal.where(:user_id => current_user)
-    accepted_invitations = current_user.invitations.select { |invite| invite.accepted? }
+    @invitations = current_user.invitations
+    accepted_invitations = @invitations.select { |invite| invite.accepted? }
     @deals_invited_to = accepted_invitations.collect { |invite| invite.deal }
     
     @all_deals = @deals + @deals_invited_to
@@ -41,6 +42,7 @@ class DealsController < ApplicationController
     @new_deals_count = count_deals_with_status 'new'
     @due_diligence_deals_count = count_deals_with_status 'due_diligence'
     @pending_deals_count = count_deals_with_status 'pending'
+    @invites_this_month_count = count_invites_this_month
   end
   
   private
@@ -51,5 +53,13 @@ class DealsController < ApplicationController
   
   def count_deals_with_status status
     @all_deals.count { |deal| deal.status == status }
+  end
+  
+  def count_invites_this_month
+    @invitations.count do |invite| 
+      date_created = invite.created_at.to_date
+      today = Date.today
+      date_created.month == today.month and date_created.year == today.year
+    end
   end
 end

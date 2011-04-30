@@ -72,11 +72,12 @@ describe DealsController do
         mock_model(Deal, :status => 'pending')
       ]
       
+      now = DateTime.now
       invitations = [
-        Invitation.new(:deal => @deals_invited_to[0], :accepted => true), 
-        Invitation.new(:deal => @deals_invited_to[1], :accepted => true),
-        Invitation.new(:deal => @deals_invited_to[2], :accepted => true),
-        Invitation.new(:deal => mock_model(Deal), :accepted => false)
+        Invitation.new(:deal => @deals_invited_to[0], :accepted => true, :created_at => now), 
+        Invitation.new(:deal => @deals_invited_to[1], :accepted => true, :created_at => now),
+        Invitation.new(:deal => @deals_invited_to[2], :accepted => true, :created_at => now - 1.month),
+        Invitation.new(:deal => mock_model(Deal), :accepted => false, :created_at => now)
       ]
       @current_user.stub(:invitations).and_return(invitations)
     end
@@ -115,6 +116,12 @@ describe DealsController do
       get 'index'
       
       assigns(:pending_deals_count).should == 2
+    end
+    
+    it "should calculate the number of deals received this month" do
+      get 'index'
+      
+      assigns(:invites_this_month_count).should == 3
     end
     
   end
