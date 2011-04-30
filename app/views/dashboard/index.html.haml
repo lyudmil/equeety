@@ -8,7 +8,7 @@
       #progress-bar
         #progress-level{:style => "width:" + remaining_budget_percentage.to_s + "%"}
         #progress-label
-          = remaining_budget_percentage.to_s + "% of " + number_to_currency(current_user.budget, :units => "$") + " remaining." 
+          = progress_bar_message
 
 #left_section
   #inner_left_section
