@@ -498,13 +498,16 @@ a {
 
 
 #progress-bar {
-   background: url(../images/percentage-bg.png) no-repeat left center;
-   width: 626px;
+   border: 1px solid #ccc;
+   width: 605px;
    height: 56px;
-   margin: 0 auto;
-   margin-left: -5px;
-	}
+   margin: 2px 5px 2px 0; 
+   padding: 1px; 
+   float: left; 
+   background: white;
+}
+
 #progress-level {
-   background: url(../images/progress.png) no-repeat left center;
+   background-color: #ace97c; 
    height: 56px;
-	}
+}
