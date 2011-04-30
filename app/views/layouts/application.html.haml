@@ -24,7 +24,7 @@
                     = link_to image_tag('nav_02.gif') + "Deals", deals_path
           #user_detail_section
             - if current_user
-              %img{:src => "/images/user_img.jpg", :alt => "user"}
+              = image_tag(current_user.gravatar_url(:size => 30), :class => 'gravatar')
               %span
                 = current_user.email
                 = link_to "Profile", user_path, :class => "profile"

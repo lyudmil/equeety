@@ -53,6 +53,7 @@ GEM
       abstract (>= 1.0.0)
     ffi (0.6.3)
       rake (>= 0.8.7)
+    gravtastic (3.1.0)
     haml (3.0.23)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -125,6 +126,7 @@ DEPENDENCIES
   autotest
   autotest-growl
   capybara
+  gravtastic
   haml-rails
   jquery-rails
   rails (~> 3.0.0)

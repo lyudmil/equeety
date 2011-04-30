@@ -7,6 +7,7 @@ gem 'sqlite3-ruby', '1.2.5', :require => 'sqlite3'
 
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'gravtastic'
 
 group :development, :test do
   gem 'rspec-rails'

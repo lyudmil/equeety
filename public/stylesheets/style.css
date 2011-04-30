@@ -6,6 +6,10 @@ h1, h2, h3, h4, h5, h6, ul, ol, li, form, p, filedset, img {
    font-weight:normal;
 }
 
+img.gravatar {
+	border: 2px solid #fff;
+}
+
 form, fieldset {
    margin:0;
    padding:0;
@@ -139,7 +143,7 @@ a {
 
 #user_detail_section img {
    float:left;
-   padding: 0 5px 5px 5px;
+   margin: 0 5px 5px 5px;
 }
 
 #user_detail_section span {
