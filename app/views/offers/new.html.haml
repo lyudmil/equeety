@@ -43,6 +43,8 @@
     = f.label :round
     %br/
     = f.select :round, round_options
+
+  = hidden_field :deal, :status, :value => 'new'
   
   .actions
     = f.submit :value => "Submit offer"

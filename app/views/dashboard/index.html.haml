@@ -10,29 +10,6 @@
         #progress-label
           = progress_bar_message
 
-#left_section
-  #inner_left_section
-    .mydeal_bg
-      .mydeal_left_curve
-        .mydeal_right_curve
-          %h4 Deals proposed by other Equeety users
-    .left_section_content
-      %ul
-        - for invitation in private_invitations
-          %li
-          = link_to(invitation.deal.startup_name, invitation.deal)
-          = button_to "Accept", invitation, :method => :put
-          = button_to "Reject", invitation, :confirm => 'Are you sure you want to reject this deal?', :method => :delete
+= render :partial => 'invite_list', :locals => { :title => 'Deals proposed by other Equeety users', :invitations => private_invitations }
 
-#left_section
-  #inner_left_section
-    .mydeal_bg
-      .mydeal_left_curve
-        .mydeal_right_curve
-          %h4 Deals proposed through your public page
-    .left_section_content
-      %ul
-        - for invitation in public_invitations
-          %li #{invitation.deal.startup_name}
-          = button_to "Accept", invitation, :method => :put
-          = button_to "Reject", invitation, :confirm => 'Are you sure you want to reject this deal?', :method => :delete
+= render :partial => 'invite_list', :locals => { :title => 'Deals proposed through your public page', :invitations => public_invitations }
