@@ -516,21 +516,37 @@ a {
 }
 
 #invitation_controls {
-	padding-top: 30px;	
+	padding-top: 5px;
+	overflow:hidden;
+	width: 100%;
 }
 
 a.button {
-	font-size: 16px;
-	color: #444;
+	display: block;
 	float:right;
-	padding: 6px 32px 6px 32px;
-	margin: 0 2px 0 2px;
+	padding-right: 10px;
+}
+
+a.button span {
+	width: auto;
+	display: block;
+	font-size: 16px;
+	color: black;
+	padding: 7px 25px 7px 35px;
 }
 
 a.accept {
+	background: url(../images/accept_right.png) no-repeat scroll top right;
+}
+
+a.accept span {
 	background: url(../images/accept.png) no-repeat;
 }
 
 a.reject {
+	background: url(../images/reject_right.png) no-repeat scroll top right;
+}
+
+a.reject span {
 	background: url(../images/reject.png) no-repeat;
 }
