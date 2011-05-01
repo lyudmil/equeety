@@ -20,5 +20,5 @@
                 %strong
                   = link_to 'View More', invitation.deal
                 #invitation_controls
-                  = button_to "Accept", invitation, :method => :put
-                  = button_to "Reject", invitation, :confirm => 'Are you sure you want to reject this deal?', :method => :delete
+                  = link_to "Accept", invitation, :method => :put, :class => 'button accept'
+                  = link_to "Reject", invitation, :confirm => 'Are you sure you want to reject this deal?', :method => :delete, :class => 'button reject'
