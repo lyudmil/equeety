@@ -515,6 +515,11 @@ a {
 	color: gray;
 }
 
+#fund_stats {
+	margin-top: 60px;
+	width:100%;
+}
+
 #invitation_controls {
 	padding-top: 5px;
 	overflow:hidden;

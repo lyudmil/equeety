@@ -5,7 +5,8 @@ class DashboardController < ApplicationController
   helper_method :public_invitations
   
   def index
-    @invitations = Invitation.where(:user_id => current_user, :accepted => false)
+    @user = current_user
+    @invitations = Invitation.where(:user_id => @user, :accepted => false)
   end
   
   private

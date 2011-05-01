@@ -9,7 +9,20 @@
         #progress-level{:style => "width:" + remaining_budget_percentage.to_s + "%"}
         #progress-label
           = progress_bar_message
+      #fund_stats
+        .budget
+          %strong Initial budget:
+          #{number_to_currency(@user.budget, :unit => "$")}
+        .committed_budget
+          %strong Committed funds:
+          #{number_to_currency(@user.committed_budget, :unit => "$")}
+        .remaining_budget
+          %strong Funds remaining:
+          #{number_to_currency(@user.remaining_budget, :unit => "$")}
 
-= render :partial => 'invite_list', :locals => { :title => 'Deals proposed by other Equeety users', :invitations => private_invitations }
 
-= render :partial => 'invite_list', :locals => { :title => 'Deals proposed through your public page', :invitations => public_invitations }
+= render :partial => 'invite_list', 
+         :locals => { :title => 'Deals proposed by other Equeety users', :invitations => private_invitations }
+
+= render :partial => 'invite_list', 
+         :locals => { :title => 'Deals proposed through your public page', :invitations => public_invitations }

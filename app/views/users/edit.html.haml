@@ -6,13 +6,13 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
   .field
-    = f.label :budget
+    = f.label 'Initial fund'
     %br/
     = f.text_field :budget
     %br/
     %br/
   .field
-    = f.label "Nickname for your public page"
+    = f.label 'Set up you public page by choosing a URL.'
     %br/
     www.equeety.com/offers/ 
     = f.text_field :nickname

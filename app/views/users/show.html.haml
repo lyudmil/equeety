@@ -4,14 +4,8 @@
     %strong Email:
     #{@user.email}
   .budget
-    %strong Initial budget:
+    %strong Initial fund:
     #{number_to_currency(@user.budget, :unit => "$")} 
-  .committed_budget
-    %strong Committed budget:
-    #{number_to_currency(@user.committed_budget, :unit => "$")}
-  .remaining_budget
-    %strong Remaining budget:
-    #{number_to_currency(@user.remaining_budget, :unit => "$")}
   .public_page
     %strong Public page URL:
     www.equeety.com/offers/#{@user.nickname}
