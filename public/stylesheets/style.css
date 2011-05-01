@@ -506,7 +506,7 @@ a {
 }
 
 #progress-level {
-   background-color: #ace97c; 
+   background: url(../images/progress.png) repeat-x;
    height: 28px;
 }
 
