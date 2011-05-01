@@ -1,2 +1,6 @@
 %h1 Home Page
 %p This could be our landing page, I suppose.
+
+- unless current_user
+  = link_to "Sign up", new_user_path
+  = link_to "Log in", login_path

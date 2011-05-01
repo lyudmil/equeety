@@ -30,11 +30,6 @@
                 = link_to "Profile", user_path, :class => "profile"
                 = link_to "Log out", logout_path
 
-            - else
-              %span
-                = link_to "Sign up", new_user_path
-              %span
-                = link_to "Log in", login_path
         %page
           #notice
             = flash[:notice]

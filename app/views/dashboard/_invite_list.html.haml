@@ -6,17 +6,19 @@
           %h4 #{title}
 
     .left_section_content
-      %ul
-        - for invitation in invitations
-          .common_section_bg
-            .common_section_top_cuve
-              .common_section_bottom_cuve
-                .common_section_content
-                  = image_tag(status_image_for(invitation.deal), :class => "new")
-                  %h3
-                    = link_to(invitation.deal.startup_name.titlecase, invitation.deal)
-                  %strong
-                    = link_to 'View More', invitation.deal
-                  #invitation_controls
-                    = button_to "Accept", invitation, :method => :put
-                    = button_to "Reject", invitation, :confirm => 'Are you sure you want to reject this deal?', :method => :delete
+      - if invitations.empty?
+        No invitations to show.
+
+      - for invitation in invitations
+        .common_section_bg
+          .common_section_top_cuve
+            .common_section_bottom_cuve
+              .common_section_content
+                = image_tag(status_image_for(invitation.deal), :class => "new")
+                %h3
+                  = link_to(invitation.deal.startup_name.titlecase, invitation.deal)
+                %strong
+                  = link_to 'View More', invitation.deal
+                #invitation_controls
+                  = button_to "Accept", invitation, :method => :put
+                  = button_to "Reject", invitation, :confirm => 'Are you sure you want to reject this deal?', :method => :delete
