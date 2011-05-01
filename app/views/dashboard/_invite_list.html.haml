@@ -20,7 +20,8 @@
                 %strong
                   = link_to 'View More', invitation.deal
                 #invitation_controls
-                  = link_to invitation_path(invitation), :method => :put, :class => 'button accept' do
-                    %span Accept
                   = link_to invitation_path(invitation), :confirm => 'Are you sure you want to reject this deal?', :method => :delete, :class => 'button reject' do
                     %span Reject
+                  = link_to invitation_path(invitation), :method => :put, :class => 'button accept' do
+                    %span Accept
+                  
