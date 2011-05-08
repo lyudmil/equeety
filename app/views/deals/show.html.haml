@@ -17,8 +17,9 @@
   #{number_to_currency(@deal.proposed_valuation, :unit => "$")}
 
 .closing_date
-  %strong Closing date:
-  = @deal.closing_date? ? @deal.closing_date : :none
+  %strong Closing date: 
+  - if @deal.closing_date?
+    = l @deal.closing_date
 
 .round
   %strong Round:
