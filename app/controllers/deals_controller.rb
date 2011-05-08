@@ -47,6 +47,13 @@ class DealsController < ApplicationController
   
   private
   
+  def require_user_ownership_of_deal
+    @deal = Deal.find(params[:id])
+    unless current_user.owns? @deal
+      redirect_to @deal, :notice => "You need to own this deal to edit it."
+    end
+  end
+  
   def deal_parameters
     params[:deal].merge({:user => current_user})
   end

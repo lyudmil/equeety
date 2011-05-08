@@ -143,7 +143,7 @@ describe DealsController do
       @current_user.stub(:owns?).with(@deal).and_return(false)
       get 'edit', :id => @deal.id
       
-      response.should redirect_to deals_url
+      response.should redirect_to @deal
     end
   end
   
@@ -179,7 +179,7 @@ describe DealsController do
       @current_user.stub(:owns?).with(@deal).and_return(false)
       put 'update', :id => 23
       
-      response.should redirect_to deals_url
+      response.should redirect_to @deal
       flash[:notice].should == "You need to own this deal to edit it."
     end
   end
