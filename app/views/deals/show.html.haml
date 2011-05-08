@@ -1,27 +1,37 @@
 %h1 #{@deal.startup_name}
+
 .logo= image_tag(@deal.logo_url, :class => 'logo_img') if @deal.logo_url?
+
 .name= link_to_if @deal.website?, sanitize(@deal.startup_name), sanitize(@deal.website)
+
 .contact
   %strong Contact:
   %span.name= mail_to @deal.contact_name, @deal.contact_email
+
 .required_amount
   %strong Required:
   #{number_to_currency(@deal.required_amount, :unit => "$")}
+
 .proposed_valuation
   %strong Proposed valuation:
   #{number_to_currency(@deal.proposed_valuation, :unit => "$")}
+
 .closing_date
   %strong Closing date:
   = @deal.closing_date? ? @deal.closing_date : :none
+
 .round
   %strong Round:
   = @deal.round
+
 .status
   %strong Status:
   = @deal.status.humanize.capitalize
+
 .description
   %strong Description:
   = @deal.description
+
 .commitments
   %strong Commitments by investors
   %ul
@@ -30,6 +40,6 @@
       = link_to "Edit", edit_deal_commitment_path(@deal, commitment)
 
 - unless current_user.has_invested_in?(@deal)
-  =link_to "Invest in this deal", new_deal_commitment_path(@deal)
+  - if current_user.can_invest_in?(@deal)
+    =link_to "Invest in this deal", new_deal_commitment_path(@deal)
 =link_to "Invite others to invest", new_deal_invitation_path(@deal)
-=link_to "Back to deals", deals_path
