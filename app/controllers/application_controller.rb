@@ -32,8 +32,8 @@ class ApplicationController < ActionController::Base
   
   def require_user_access_to_deal key_in_params = :id
     @deal = Deal.find(params[key_in_params])
-    unless current_user.has_access_to? @deal
-      redirect_to deals_path, :notice => "You don't have access to this deal and therefore can't invest in it."
+    unless current_user.can_view? @deal
+      redirect_to deals_path, :notice => "You don't have access to this deal."
     end
   end
   

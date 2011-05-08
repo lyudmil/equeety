@@ -67,12 +67,12 @@ describe User do
     end
   end
     
-  describe "has access to deal" do
+  describe "can view deal" do
     it "should be true if the user is the owner of the deal" do
       user = User.new
       deal = Deal.new(:user => user)
       
-      user.has_access_to?(deal).should be_true
+      user.can_view?(deal).should be_true
     end
     
     it "should be true if the user has been invited to the deal" do
@@ -80,14 +80,44 @@ describe User do
       deal = Deal.new(:user => mock_model(User))
       user.invitations.build(:deal => deal)
       
-      user.has_access_to?(deal).should be_true
+      user.can_view?(deal).should be_true
     end
     
     it "should be false if the user is not the owner of the deal and has not been invited to it" do
       user = User.new
       deal = Deal.new(:user => mock_model(User))
       
-      user.has_access_to?(deal).should be_false
+      user.can_view?(deal).should be_false
+    end
+  end
+  
+  describe "can invest in deal" do
+    before :each do
+      @user = User.new
+    end
+    
+    it "should be true if the user is the owner of the deal" do
+      deal = Deal.new(:user => @user)
+      @user.can_invest_in?(deal).should be_true      
+    end
+    
+    it "should be false if the user is not the owner and is not invited to the deal" do
+      deal = Deal.new
+      @user.can_invest_in?(deal).should be_false
+    end
+    
+    it "should be true if the user has an accepted invitation to the deal" do
+      deal = Deal.new
+      @user.invitations.build(:deal => deal, :accepted => true)
+      
+      @user.can_invest_in?(deal).should be_true
+    end
+    
+    it "should be false if the user has an unaccepted invitation to the deal" do
+      deal = Deal.new
+      @user.invitations.build(:deal => deal, :accepted => false)
+      
+      @user.can_invest_in?(deal).should be_false
     end
   end
   

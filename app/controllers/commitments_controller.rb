@@ -32,7 +32,11 @@ class CommitmentsController < ApplicationController
   private
   
   def require_user_access_to_deal_to_invest
-    require_user_access_to_deal :deal_id
+    @deal = Deal.find(params[:deal_id])
+    
+    unless current_user.can_invest_in? @deal
+      redirect_to deals_path, :notice => "You don't have access to this deal and therefore can't invest in it."
+    end
   end
   
   def require_user_access_to_commitment

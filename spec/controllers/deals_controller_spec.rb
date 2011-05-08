@@ -6,7 +6,7 @@ describe DealsController do
   before :each do
     @current_user = mock_model(User)
     @current_user.stub(:deals).and_return(Deal)
-    @current_user.stub(:has_access_to?).and_return(true)
+    @current_user.stub(:can_view?).and_return(true)
     
     @deal = mock_model(Deal)
     @deal.stub(:user).and_return(@current_user)

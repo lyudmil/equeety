@@ -10,7 +10,11 @@ class User < ActiveRecord::Base
   has_many :commitments
   has_many :invitations
   
-  def has_access_to? deal
+  def can_invest_in? deal
+    owns? deal or invitations.any? { |invite| invite.deal == deal and invite.accepted? }
+  end
+  
+  def can_view? deal
     owns? deal or invitations.any? { |invite| invite.deal == deal }
   end
   

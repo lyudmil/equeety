@@ -3,7 +3,7 @@ require 'spec_helper'
 describe InvitationsController do
   
   before :each do
-    @current_user = mock_model(User, :has_access_to? => true)
+    @current_user = mock_model(User, :can_view? => true)
     controller.stub(:current_user).and_return(@current_user)
     
     @invitation = mock_model(Invitation, :id => 23, :user= => true, :save => true)

@@ -5,10 +5,11 @@ describe CommitmentsController do
   before :each do
     @current_user = mock_model(User, :budget => 100000)
     @current_user.stub(:deals).and_return(Deal)
-    @current_user.stub(:has_access_to?).and_return(true)
+    @current_user.stub(:can_invest_in?).and_return(true)
     
     @exiting_deal = mock_model(Deal, deal_parameters.merge(:user => @current_user))
     @exiting_deal.stub(:commitments).and_return(Commitment)
+    @exiting_deal.stub(:description).and_return("Some description")
     Deal.stub(:find).with(@exiting_deal.id).and_return(@exiting_deal)
     
     @commitment = mock_model(Commitment, :amount => 123, :user => @current_user)
@@ -27,10 +28,10 @@ describe CommitmentsController do
     end
     
     it "should not allow users that do not have access to a deal to invest" do
-      controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => false))
+      controller.stub(:current_user).and_return(mock_model(User, :can_invest_in? => false))
       get 'new', :deal_id => @exiting_deal.id
       
-      response.should redirect_to :controller => :deals, :action => :index
+      response.should redirect_to deals_path
       flash[:notice].should == "You don't have access to this deal and therefore can't invest in it."
     end
   end
@@ -100,7 +101,7 @@ describe CommitmentsController do
   describe "enforcement of access rules for commitments" do
     %w(edit update).each do |action|
       it "should refuse to #{action} if the current user is not the original investor" do
-        controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => true))
+        controller.stub(:current_user).and_return(mock_model(User, :can_invest_in? => true))
         
         get 'edit', :deal_id => @exiting_deal.id, :id => @commitment.id if action == 'edit'
         put 'update', :deal_id => @exiting_deal.id, :id => @commitment.id if action == 'update'
@@ -121,11 +122,11 @@ describe CommitmentsController do
     
     %w(new create edit update).each do |action|
       it "#{action} should not allow users that do not have access to a deal to invest" do
-        controller.stub(:current_user).and_return(mock_model(User, :has_access_to? => false))
+        controller.stub(:current_user).and_return(mock_model(User, :can_invest_in? => false))
         
         dispatch action
         
-        response.should redirect_to :controller => :deals, :action => :index
+        response.should redirect_to deals_path
         flash[:notice].should == "You don't have access to this deal and therefore can't invest in it."
       end
       
