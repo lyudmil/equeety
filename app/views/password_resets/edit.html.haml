@@ -1,0 +1,18 @@
+%h2 Choose a new password for #{@user.email} using the form below
+
+= form_for(@user, :url => {:controller => :password_resets, :action => :update}) do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :password
+    %br/
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation
+    %br/
+    = f.password_field :password_confirmation
+  .actions
+    = f.submit :value => 'Reset password'

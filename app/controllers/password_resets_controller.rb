@@ -9,8 +9,8 @@ class PasswordResetsController < ApplicationController
     if @user.update_attributes(params[:user])
       @user.reset_perishable_token!
       
-      flash[:notice] = "Your password was reset. You can now use your new password to log in."
-      redirect_to login_path
+      flash[:notice] = "Your password has been reset."
+      redirect_to dashboard_path
     else
       render :action => :edit
     end

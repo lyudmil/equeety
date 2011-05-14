@@ -31,11 +31,11 @@ describe PasswordResetsController do
       put :update, :id => @user.perishable_token, :user => user_params
     end
     
-    it "should redirect to login if reset successful" do    
+    it "should redirect to dashboard if reset successful" do    
       put :update, :id => @user.perishable_token
       
-      response.should redirect_to login_path
-      flash[:notice].should == "Your password was reset. You can now use your new password to log in."
+      response.should redirect_to dashboard_path
+      flash[:notice].should == "Your password has been reset."
     end
     
     it "should render edit template again if reset unsuccessful" do
