@@ -186,6 +186,17 @@ describe User do
     user.save
     
     user.perishable_token.should_not be_nil
+    User.find_using_perishable_token(user.perishable_token).should == user
+  end
+  
+  it "should be able to reset its perishable token" do
+    user = User.new(valid_fields)
+    user.save
+    old_token = user.perishable_token
+    
+    user.reset_perishable_token!
+    
+    user.perishable_token.should_not == old_token
   end
   
   private
