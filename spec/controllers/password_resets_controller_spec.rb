@@ -7,6 +7,14 @@ describe PasswordResetsController do
     User.should_receive(:find_using_perishable_token).with("RW78z").and_return(@user)
   end
   
+  it "should require the user to be logged out"
+  
+  it "should display message if user not found"
+  
+  describe "new" do
+    it "should send an email with reset instructions"
+  end
+  
   describe "edit" do
     it "should load the user with the token requested" do
       get :edit, :id => @user.perishable_token
