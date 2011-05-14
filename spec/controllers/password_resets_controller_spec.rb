@@ -6,9 +6,7 @@ describe PasswordResetsController do
     @user = mock_model(User, :perishable_token => "RW78z", :update_attributes => true, :reset_perishable_token! => true)
     User.stub(:find_using_perishable_token).with("RW78z").and_return(@user)
   end
-  
-  it "should display message if user not found"
-  
+    
   describe "new" do
     it "should send an email with reset instructions"
   end
@@ -26,6 +24,14 @@ describe PasswordResetsController do
       get :edit, :id => @user.perishable_token
       
       response.should redirect_to root_path
+    end
+    
+    it "should display notification if user not found" do
+      User.stub(:find_using_perishable_token).with("ABC").and_return(nil)
+      get :edit, :id => "ABC"
+      
+      response.should redirect_to root_path
+      flash[:notice].should == "The password reset link has expired. Please renew your request."
     end
   end
   
