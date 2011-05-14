@@ -181,6 +181,13 @@ describe User do
     end
   end
   
+  it "should have a perishable token" do
+    user = User.new(valid_fields)
+    user.save
+    
+    user.perishable_token.should_not be_nil
+  end
+  
   private
   
   def valid_fields

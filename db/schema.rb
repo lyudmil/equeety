@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110203033505) do
+ActiveRecord::Schema.define(:version => 20110514123756) do
 
   create_table "commitments", :force => true do |t|
     t.decimal  "amount",     :precision => 12, :scale => 2
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20110203033505) do
     t.datetime "updated_at"
     t.decimal  "budget",            :precision => 12, :scale => 2
     t.string   "nickname"
+    t.string   "perishable_token",                                 :default => "", :null => false
   end
 
 end
