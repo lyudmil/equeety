@@ -1,0 +1,5 @@
+%h3 Please provide your email and we'll send you instructions to reset your password
+
+= form_tag(:controller => :password_resets, :action => :create)
+= email_field_tag(:email)
+= submit_tag "Send password reset instructions"

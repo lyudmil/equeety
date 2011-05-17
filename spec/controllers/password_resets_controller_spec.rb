@@ -15,7 +15,7 @@ describe PasswordResetsController do
     
     it "should send an email with reset instructions" do
       mail = mock
-      UserMailer.should_receive(:password_reset_email_to).with(@user).and_return(mail)
+      UserMailer.should_receive(:password_reset_email).with(@user).and_return(mail)
       mail.should_receive(:deliver).once
       
       post :create, :email => "user@email.com"      

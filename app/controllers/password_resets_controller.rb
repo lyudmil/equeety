@@ -10,7 +10,7 @@ class PasswordResetsController < ApplicationController
     user = User.find_by_email(params[:email])
     
     if user
-      UserMailer.password_reset_email_to(user).deliver
+      UserMailer.password_reset_email(user).deliver
     
       flash[:notice] = "We sent you instructions to reset your password. Please check your email."
       redirect_to root_path
