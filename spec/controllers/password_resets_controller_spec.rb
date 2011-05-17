@@ -8,17 +8,31 @@ describe PasswordResetsController do
   end
     
   describe "create" do
-    it "should send an email with reset instructions" do
-      User.stub(:find_using_perishable_token)
+    before :each do
+      User.stub(:find_by_email).and_return(nil)
       User.stub(:find_by_email).with("user@email.com").and_return(@user)
-      ActionMailer::Base.perform_deliveries = false
+    end
+    
+    it "should send an email with reset instructions" do
+      mail = mock
+      UserMailer.should_receive(:password_reset_email_to).with(@user).and_return(mail)
+      mail.should_receive(:deliver).once
       
+      post :create, :email => "user@email.com"      
+    end
+    
+    it "should redirect to root with a notice" do
       post :create, :email => "user@email.com"
       
-      email = ActionMailer::Base.deliveries.first
-      email.should_not be_nil
-      email.to[0].should == @user.email
-      email.from[0].should == "support@equeety.com"
+      response.should redirect_to root_path
+      flash[:notice].should == "We sent you instructions to reset your password. Please check your email."
+    end
+    
+    it "should handle inexistent emails elegantly" do
+      post :create, :email => "noaccount@email.com"
+      
+      response.should render_template "new"
+      flash[:notice].should == "We couldn't find an account for noaccount@email.com."
     end
   end
   

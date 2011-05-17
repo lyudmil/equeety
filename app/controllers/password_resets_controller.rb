@@ -1,14 +1,23 @@
 class PasswordResetsController < ApplicationController
   
   before_filter :require_no_user
-  before_filter :load_user_with_given_perishable_token
+  before_filter :load_user_with_given_perishable_token, :except => [:new, :create]
   
   def new
   end
   
   def create
     user = User.find_by_email(params[:email])
-    UserMailer.password_reset_email_to(user).deliver
+    
+    if user
+      UserMailer.password_reset_email_to(user).deliver
+    
+      flash[:notice] = "We sent you instructions to reset your password. Please check your email."
+      redirect_to root_path
+    else
+      flash[:notice] = "We couldn't find an account for #{params[:email]}."
+      render :action => :new
+    end
   end
   
   def edit
