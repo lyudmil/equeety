@@ -3,12 +3,23 @@ require 'spec_helper'
 describe PasswordResetsController do
   
   before :each do
-    @user = mock_model(User, :perishable_token => "RW78z", :update_attributes => true, :reset_perishable_token! => true)
+    @user = mock_model(User, :email => "user@email.com", :perishable_token => "RW78z", :update_attributes => true, :reset_perishable_token! => true)
     User.stub(:find_using_perishable_token).with("RW78z").and_return(@user)
   end
     
-  describe "new" do
-    it "should send an email with reset instructions"
+  describe "create" do
+    it "should send an email with reset instructions" do
+      User.stub(:find_using_perishable_token)
+      User.stub(:find_by_email).with("user@email.com").and_return(@user)
+      ActionMailer::Base.perform_deliveries = false
+      
+      post :create, :email => "user@email.com"
+      
+      email = ActionMailer::Base.deliveries.first
+      email.should_not be_nil
+      email.to[0].should == @user.email
+      email.from[0].should == "support@equeety.com"
+    end
   end
   
   describe "edit" do

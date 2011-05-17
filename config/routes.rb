@@ -13,7 +13,7 @@ Equeety::Application.routes.draw do
   
   resources :invitations, :only => [:update, :destroy]
   
-  resources :password_resets, :only => [:new, :edit, :update]
+  resources :password_resets
   
   get "/offers/:nickname" => 'offers#new'
   post "offers/:nickname/create" => 'offers#create'
