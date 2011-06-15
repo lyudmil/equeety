@@ -1,0 +1,140 @@
+<div id="main-content" class="span-24 last">
+	<div id="main-content-left" class="span-4 first">
+		<div class="span-4 last line-item first-item heading">MY DEALS</div>
+		<div id="deals-added" class="span-4 last line-item"><%= @deals.count %> Deals Added</div>
+
+		<div class="span-4 last line-item heading">DEAL STATUS</div>
+		<div class="span-4 last line-item">All Deals (<%= @all_deals.count %>)</div>
+		<div class="span-4 last line-item">New (<%= @new_deals_count %>)</div>
+		<div class="span-4 last line-item">In Due Diligence (<%= @due_diligence_deals_count %>)</div>
+		<div class="span-4 last line-item">Pending (<%= @pending_deals_count %>)</div>
+
+		<div class="span-4 last line-item heading">HISTORY</div>
+		<div class="span-4 last line-item">Deals Received (<%= @invites_this_month_count %>)</div>
+	</div>
+	
+	<div id="main-content-middle" class="span-14">
+		<div class="section span-14 last">
+			<h2>All Deals</h2>
+			<h3>You have added <%= @deals.count %> deals.</h3>
+		</div>
+		
+		<div class="section fund-status span-14 last">
+			<h3>Fund status</h3>
+			<div class="span-3">
+				<div class="heading">INITIAL BUDGET</div>
+				<div class="value">$200,000</div>
+			</div>
+			<div class="span-3">
+				<div class="heading">COMMITTED FUNDS</div>
+				<div class="value">$50,000</div>
+			</div>
+			<div class="span-3">
+				<div class="heading">FUNDS REMAINING</div>
+				<div class="value highlighted">$150,000</div>
+			</div>
+			<div class="span-5 last">
+				<div class="span-5 last heading">75% FUNDS REMAINING</div>
+				<div class="span-5 value last progress-bar">
+					<div class="span-4 progress-bar-background">
+						<div class="progress">&nbsp;</div>
+					</div>
+					<div class="span-1 progress-text last">75%</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="deal-previews span-14 last">
+			<table>
+				<thead>
+					<tr>
+						<td>Startup Name</td>
+						<td>Status</td>
+						<td>Commitments</td>
+						<td>Round</td>
+						<td>Closing Date</td>
+						<td>&nbsp;</td>
+					</tr>
+				</thead>
+				<tbody>
+					<% for deal in @all_deals %>
+						<tr>
+							<%= content_tag(:td, deal.startup_name, :class => "startup-name") %>
+							<%= content_tag(:td, deal.status.humanize.capitalize) %>
+							<%= content_tag(:td, deal.commitments.count) %>
+							<%= content_tag(:td, deal.round) %>
+							<%= content_tag(:td, deal.closing_date.strftime("%B %d, %Y")) %>
+							<%= content_tag(:td, link_to("Details", deal_path(deal)))%>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div id="main-content-right" class="span-5 last">
+		<div class="span-5 last">
+			<div class="status">New</div>
+			<div class="startup-name">
+				<h3>Equeety</h3>
+			</div>
+		</div>
+		<div class="span-5 last section-title">DETAILS</div>
+		<div class="span-5 last deal-field">
+			<a href="#">www.equeety.com</a>
+		</div>
+		
+		<div class="span-5 last deal-field">
+			<div>someone@equeety.com</div>
+			<div class="label">CONTACT</div>
+		</div>
+		
+		<div class="span-5 last deal-field">
+			<div class="value">$10,000</div>
+			<div class="label">REQUIRED</div>
+		</div>
+		
+		<div class="span-5 last deal-field">
+			<div class="value">$1,000,000</div>
+			<div class="label">PROPOSED VALUATION</div>
+		</div>
+		
+		<div class="span-5 last deal-field">
+			<div class="value">June 18, 2011</div>
+			<div class="label">CLOSING DATE</div>
+		</div>
+		
+		<div class="span-5 last deal-field">
+			<div class="short-value">A</div>
+			<div class="short-label">ROUND</div>
+		</div>
+		
+		<div class="span-5 last deal-field section-end">
+			<div class="short-value">3</div>
+			<div class="short-label">COMMITMENTS</div>
+		</div>
+		
+		<div class="span-5 last section-title">DESCRIPTION</div>
+		<div class="span-5 last description">
+			<p>This is a great project...</p>
+		</div>
+		
+		<div class="span-5 last">
+			<div class="deal-controls">
+				<a href="#">
+					<div class="blue-button">
+						Edit Deal Details
+					</div>
+				</a>
+			</div>
+			
+			<div class="deal-controls">
+				<a href="#">
+					<div class="blue-button">
+						Invite Investors
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
