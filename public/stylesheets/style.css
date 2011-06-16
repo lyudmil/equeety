@@ -127,6 +127,10 @@ body {
 	padding-bottom: 1em;
 }
 
+#main-content-middle .add-deal-controls {
+	margin-top: 1.5em;
+}
+
 #main-content-right {
 	margin-right: -10px;
 	padding: 24px 15px 15px 15px;
@@ -192,21 +196,42 @@ body {
 }
 
 div.deal-controls {
-	width: 121px;
-	height: 31px;
 	margin-top: 1em;
 }
 
-div.deal-controls a {
+div.button-container a {
 	text-decoration: none;
+}
+
+div.button {
+	text-align: center;	
 	color: white;
 	font-size: 1.1em;
 }
 
-div.blue-button {
+div.blue {
 	padding: 7px 0 7px 0;
-	text-align: center;
+	width: 121px;
+	height: 31px;
 	background: url(../images/blue-button.png) no-repeat;
+}
+
+div.orange {
+	float:right;
+	width: 139px;
+	height: 29px;
+	background: url(../images/orange-button.png) no-repeat;
+}
+
+span.large-character {
+	font-size: 3em;
+	line-height: 22px;
+}
+
+span.button-label {
+	margin-left: .5em;
+	line-height: .3em;
+	vertical-align: text-top;
 }
 
 div.progress-bar {
