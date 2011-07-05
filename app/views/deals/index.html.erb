@@ -5,21 +5,13 @@
 		<div id="deals-added" class="span-4 last line-item"><%= @deals.count %> Deals Added</div>
 
 		<div class="span-4 last line-item heading">DEAL STATUS</div>
-		<%= link_to deals_path do %>
-			<div class="span-4 last line-item <%= 'selected' unless params[:status] %>">All Deals (<%= @all_deals.count %>)</div>
-		<% end %>
+		<%= render :partial => "status_selected_deals", :locals => { :heading => "All Deals", :count => @all_deals.count, :status => nil } %>
+				
+		<%= render :partial => "status_selected_deals", :locals => { :heading => "New", :count => @new_deals_count, :status => "new" } %>
 		
-		<%= link_to :action => "index", :status => "new" do %>
-			<div class="span-4 last line-item <%= 'selected' if params[:status] == 'new' %>">New (<%= @new_deals_count %>)</div>
-		<% end %>
+		<%= render :partial => "status_selected_deals", :locals => { :heading => "In Due Diligence", :count => @due_diligence_deals_count, :status => "due_diligence" } %>
 		
-		<%= link_to :action => "index", :status => "due_diligence" do %>
-			<div class="span-4 last line-item <%= 'selected' if params[:status] == 'due_diligence' %>">In Due Diligence (<%= @due_diligence_deals_count %>)</div>
-		<% end %>
-		
-		<%= link_to :action => "index", :status => "pending" do %>
-			<div class="span-4 last line-item <%= 'selected' if params[:status] == 'pending' %>">Pending (<%= @pending_deals_count %>)</div>
-		<% end %>
+		<%= render :partial => "status_selected_deals", :locals => { :heading => "Pending", :count => @pending_deals_count, :status => "pending" } %>
 
 		<div class="span-4 last line-item heading">HISTORY</div>
 		<div class="span-4 last line-item">Deals Received (<%= @invites_this_month_count %>)</div>

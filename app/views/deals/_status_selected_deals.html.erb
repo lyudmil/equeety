@@ -1,0 +1,5 @@
+<%= link_to :action => "index", :status => status do %>
+	<div class="span-4 last line-item <%= 'selected' if params[:status] == status %>">
+		<%= "#{heading} (#{count})" %>
+	</div>
+<% end %>
