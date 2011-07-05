@@ -1,10 +1,11 @@
+
 <div id="main-content" class="span-24 last">
 	<div id="main-content-left" class="span-4 first">
 		<div class="span-4 last line-item first-item heading">MY DEALS</div>
 		<div id="deals-added" class="span-4 last line-item"><%= @deals.count %> Deals Added</div>
 
 		<div class="span-4 last line-item heading">DEAL STATUS</div>
-		<div class="span-4 last line-item selected">All Deals (<%= @all_deals.count %>)</div>
+		<div class="span-4 last line-item selected">All Deals (<%= @deals_displayed.count %>)</div>
 		<div class="span-4 last line-item">New (<%= @new_deals_count %>)</div>
 		<div class="span-4 last line-item">In Due Diligence (<%= @due_diligence_deals_count %>)</div>
 		<div class="span-4 last line-item">Pending (<%= @pending_deals_count %>)</div>
@@ -68,7 +69,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% for deal in @all_deals %>
+					<% for deal in @deals_displayed %>
 						<tr>
 							<%= content_tag(:td, deal.startup_name, :class => "startup-name") %>
 							<%= content_tag(:td, deal.status.humanize.capitalize) %>

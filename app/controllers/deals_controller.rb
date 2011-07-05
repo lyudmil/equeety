@@ -39,9 +39,15 @@ class DealsController < ApplicationController
     
     @all_deals = @deals + @deals_invited_to
     
-    @new_deals_count = count_deals_with_status 'new'
-    @due_diligence_deals_count = count_deals_with_status 'due_diligence'
-    @pending_deals_count = count_deals_with_status 'pending'
+    if params[:status]
+      @deals_displayed = @all_deals.select { |deal| deal.status == params[:status] }
+    else
+      @deals_displayed = @all_deals
+    end
+    
+    @new_deals_count = deals_with_status('new').count
+    @due_diligence_deals_count = deals_with_status('due_diligence').count
+    @pending_deals_count = deals_with_status('pending').count
     @invites_this_month_count = count_invites_this_month
   end
   
@@ -56,6 +62,10 @@ class DealsController < ApplicationController
   
   def deal_parameters
     params[:deal].merge({:user => current_user})
+  end
+  
+  def deals_with_status status
+    @all_deals.select { |deal| deal.status == status }
   end
   
   def count_deals_with_status status

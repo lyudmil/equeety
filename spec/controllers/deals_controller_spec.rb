@@ -124,6 +124,23 @@ describe DealsController do
       assigns(:invites_this_month_count).should == 3
     end
     
+    it "should display only new deals if specified" do
+      get 'index', :status => 'new'
+      
+      assigns(:deals_displayed).should == [@deals[0], @deals_invited_to[0]]
+    end
+    
+    it "should display only due diligence deals if specified" do
+      get 'index', :status => 'due_diligence'
+      
+      assigns(:deals_displayed).should == [@deals[1], @deals_invited_to[1]]
+    end    
+    
+    it "should display only pending deals if specified" do
+      get 'index', :status => 'pending'
+      
+      assigns(:deals_displayed).should == [@deals[2], @deals_invited_to[2]]
+    end
   end
   
   describe "edit" do
