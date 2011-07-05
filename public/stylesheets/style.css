@@ -2,6 +2,7 @@ body {
 	background-image: url(../images/body-background.png);
 	background-repeat: no-repeat;
 	background-color: #c6dade;
+	font-family: "Lucida Grande" lucida sans-serif;
 }
 
 #account-controls {
@@ -224,13 +225,15 @@ div.orange {
 }
 
 span.large-character {
-	font-size: 3em;
+	font-size: 2.5em;
 	line-height: 22px;
 }
 
 span.button-label {
-	margin-left: .5em;
-	line-height: .3em;
+	margin-left: 0.5em;
+	margin-right: 0.8em;
+	line-height: .5em;
+	font-size: .8em;
 	vertical-align: text-top;
 }
 
