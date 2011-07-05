@@ -124,6 +124,12 @@ describe DealsController do
       assigns(:invites_this_month_count).should == 3
     end
     
+    it "should display all deals by default" do
+      get 'index'
+      
+      assigns(:deals_displayed).should == @deals + @deals_invited_to
+    end
+    
     it "should display only new deals if specified" do
       get 'index', :status => 'new'
       
