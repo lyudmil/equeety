@@ -68,6 +68,10 @@ body {
 	border-bottom: 1px solid #eceaea;
 }
 
+#main-content-left a {
+	text-decoration: none;
+}
+
 #main-content-left .first-item {
 	padding-top: 33px;
 }

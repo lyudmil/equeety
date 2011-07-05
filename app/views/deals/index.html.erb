@@ -5,10 +5,21 @@
 		<div id="deals-added" class="span-4 last line-item"><%= @deals.count %> Deals Added</div>
 
 		<div class="span-4 last line-item heading">DEAL STATUS</div>
-		<div class="span-4 last line-item selected">All Deals (<%= @deals_displayed.count %>)</div>
-		<div class="span-4 last line-item">New (<%= @new_deals_count %>)</div>
-		<div class="span-4 last line-item">In Due Diligence (<%= @due_diligence_deals_count %>)</div>
-		<div class="span-4 last line-item">Pending (<%= @pending_deals_count %>)</div>
+		<%= link_to deals_path do %>
+			<div class="span-4 last line-item <%= 'selected' unless params[:status] %>">All Deals (<%= @all_deals.count %>)</div>
+		<% end %>
+		
+		<%= link_to :action => "index", :status => "new" do %>
+			<div class="span-4 last line-item <%= 'selected' if params[:status] == 'new' %>">New (<%= @new_deals_count %>)</div>
+		<% end %>
+		
+		<%= link_to :action => "index", :status => "due_diligence" do %>
+			<div class="span-4 last line-item <%= 'selected' if params[:status] == 'due_diligence' %>">In Due Diligence (<%= @due_diligence_deals_count %>)</div>
+		<% end %>
+		
+		<%= link_to :action => "index", :status => "pending" do %>
+			<div class="span-4 last line-item <%= 'selected' if params[:status] == 'pending' %>">Pending (<%= @pending_deals_count %>)</div>
+		<% end %>
 
 		<div class="span-4 last line-item heading">HISTORY</div>
 		<div class="span-4 last line-item">Deals Received (<%= @invites_this_month_count %>)</div>
