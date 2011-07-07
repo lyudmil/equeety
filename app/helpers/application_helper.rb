@@ -9,4 +9,8 @@ module ApplicationHelper
     number_to_currency(amount, :unit => "$", :precision => 0)
   end
   
+  def percentage number
+    number_to_percentage(number, :precision => 0)
+  end
+  
 end

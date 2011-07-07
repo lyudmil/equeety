@@ -13,12 +13,12 @@
 		<div class="value highlighted"><%= dollars(current_user.remaining_budget) %></div>
 	</div>
 	<div class="span-5 last">
-		<div class="span-5 last heading"><%= current_user.remaining_budget_percentage %>% FUNDS REMAINING</div>
+		<div class="span-5 last heading"><%= percentage(current_user.remaining_budget_percentage) %> FUNDS REMAINING</div>
 		<div class="span-5 value last progress-bar">
 			<div class="span-4 progress-bar-background">
-				<div class="progress" style="width:<%= current_user.remaining_budget_percentage %>%;">&nbsp;</div>
+				<div class="progress" style="width:<%= percentage(current_user.remaining_budget_percentage) %>;">&nbsp;</div>
 			</div>
-			<div class="span-1 progress-text last"><%= current_user.remaining_budget_percentage %> %</div>
+			<div class="span-1 progress-text last"><%= percentage(current_user.remaining_budget_percentage) %></div>
 		</div>
 	</div>
 </div>
