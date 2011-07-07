@@ -36,4 +36,9 @@ class User < ActiveRecord::Base
     return -committed_budget unless budget
     budget - committed_budget
   end
+  
+  def remaining_budget_percentage
+    return 0 unless budget
+    ((remaining_budget / budget) * 100).to_i
+  end
 end

@@ -253,7 +253,6 @@ div.progress-bar-background {
 
 div.progress {
 	background: url(../images/progress.png) repeat-x;
-	width: 75%;
 	height: 9px;
 	margin: 1px 0 1px 0;
 }

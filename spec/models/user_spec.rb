@@ -164,6 +164,22 @@ describe User do
     end
   end
   
+  describe "remaining budget percentage" do
+    it "should be calculated correctly" do
+      user = User.new
+      user.stub(:budget => 200.0, :remaining_budget => 46.0)
+      
+      user.remaining_budget_percentage.should == 23.0
+    end
+    
+    it "should be zero if budget not set yet" do
+      user = User.new
+      user.stub(:budget => nil, :remaining_budget => 55.0)
+      
+      user.remaining_budget_percentage.should == 0.0
+    end
+  end
+  
   describe "owns?" do
     it "should be true if user is the owner of the deal" do
       user = User.new
