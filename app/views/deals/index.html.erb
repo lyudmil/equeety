@@ -1,3 +1,6 @@
+<% content_for(:head) do %>
+<%= javascript_include_tag 'deals' %>
+<% end %>
 
 <div id="main-content" class="span-24 last">
 	<div id="main-content-left" class="span-4 first">
@@ -56,7 +59,7 @@
 							<%= content_tag(:td, deal.commitments.count) %>
 							<%= content_tag(:td, deal.round) %>
 							<%= content_tag(:td, deal.closing_date.strftime("%B %d, %Y")) %>
-							<%= content_tag(:td, link_to("Details", deal_path(deal)))%>
+							<%= content_tag(:td, link_to("Details", deal_path(deal), :remote => true, :class => "deal-details"))%>
 						</tr>
 					<% end %>
 				</tbody>
