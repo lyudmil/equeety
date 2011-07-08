@@ -1,0 +1,65 @@
+<div id="deal">
+	<div class="span-5 last">
+		<div class="status"><%= @deal.status.humanize.capitalize %></div>
+		<div class="startup-name">
+			<h3><%= @deal.startup_name %></h3>
+		</div>
+	</div>
+	<div class="span-5 last section-title">DETAILS</div>
+	<div class="span-5 last deal-field">
+		<%= link_to @deal.website, "http://#{@deal.website}" %>
+	</div>
+
+	<div class="span-5 last deal-field">
+		<div><%= @deal.contact_email %></div>
+		<div class="label">CONTACT</div>
+	</div>
+
+	<div class="span-5 last deal-field">
+		<div class="value"><%= dollars(@deal.required_amount) %></div>
+		<div class="label">REQUIRED</div>
+	</div>
+
+	<div class="span-5 last deal-field">
+		<div class="value"><%= dollars(@deal.proposed_valuation) %></div>
+		<div class="label">PROPOSED VALUATION</div>
+	</div>
+
+	<div class="span-5 last deal-field">
+		<div class="value"><%= date(@deal.closing_date) %></div>
+		<div class="label">CLOSING DATE</div>
+	</div>
+
+	<div class="span-5 last deal-field">
+		<div class="short-value"><%= @deal.round %></div>
+		<div class="short-label">ROUND</div>
+	</div>
+
+	<div class="span-5 last deal-field section-end">
+		<div class="short-value"><%= @deal.commitments.count %></div>
+		<div class="short-label">COMMITMENTS</div>
+	</div>
+
+	<div class="span-5 last section-title">DESCRIPTION</div>
+	<div class="span-5 last description">
+		<p><%= @deal.description %></p>
+	</div>
+
+	<div class="span-5 last">
+		<div class="button-container deal-controls">
+			<%= link_to edit_deal_path(@deal) do %>
+				<div class="blue button">
+					Edit Deal Details
+				</div>
+			<% end %>
+		</div>
+	
+		<div class="button-container deal-controls">
+			<%= link_to new_deal_invitation_path(@deal) do %>
+				<div class="blue button">
+					Invite Investors
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

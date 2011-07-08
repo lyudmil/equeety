@@ -1,7 +1,3 @@
-<% content_for(:head) do %>
-<%= javascript_include_tag 'deals' %>
-<% end %>
-
 <div id="main-content" class="span-24 last">
 	<div id="main-content-left" class="span-4 first">
 		<div class="span-4 last line-item first-item heading">MY DEALS</div>
@@ -58,8 +54,8 @@
 							<%= content_tag(:td, deal.status.humanize.capitalize) %>
 							<%= content_tag(:td, deal.commitments.count) %>
 							<%= content_tag(:td, deal.round) %>
-							<%= content_tag(:td, deal.closing_date.strftime("%B %d, %Y")) %>
-							<%= content_tag(:td, link_to("Details", deal_path(deal), :remote => true, :class => "deal-details"))%>
+							<%= content_tag(:td, date(deal.closing_date)) %>
+							<%= content_tag(:td, link_to("Details", deal_path(deal), :remote => true))%>
 						</tr>
 					<% end %>
 				</tbody>
@@ -68,68 +64,8 @@
 	</div>
 	
 	<div id="main-content-right" class="span-5 last">
-		<div class="span-5 last">
-			<div class="status">New</div>
-			<div class="startup-name">
-				<h3>Equeety</h3>
-			</div>
-		</div>
-		<div class="span-5 last section-title">DETAILS</div>
-		<div class="span-5 last deal-field">
-			<a href="#">www.equeety.com</a>
-		</div>
-		
-		<div class="span-5 last deal-field">
-			<div>someone@equeety.com</div>
-			<div class="label">CONTACT</div>
-		</div>
-		
-		<div class="span-5 last deal-field">
-			<div class="value">$10,000</div>
-			<div class="label">REQUIRED</div>
-		</div>
-		
-		<div class="span-5 last deal-field">
-			<div class="value">$1,000,000</div>
-			<div class="label">PROPOSED VALUATION</div>
-		</div>
-		
-		<div class="span-5 last deal-field">
-			<div class="value">June 18, 2011</div>
-			<div class="label">CLOSING DATE</div>
-		</div>
-		
-		<div class="span-5 last deal-field">
-			<div class="short-value">A</div>
-			<div class="short-label">ROUND</div>
-		</div>
-		
-		<div class="span-5 last deal-field section-end">
-			<div class="short-value">3</div>
-			<div class="short-label">COMMITMENTS</div>
-		</div>
-		
-		<div class="span-5 last section-title">DESCRIPTION</div>
-		<div class="span-5 last description">
-			<p>This is a great project...</p>
-		</div>
-		
-		<div class="span-5 last">
-			<div class="button-container deal-controls">
-				<a href="#">
-					<div class="blue button">
-						Edit Deal Details
-					</div>
-				</a>
-			</div>
-			
-			<div class="button-container deal-controls">
-				<a href="#">
-					<div class="blue button">
-						Invite Investors
-					</div>
-				</a>
-			</div>
+		<div id="deal">
+			<p>Select a deal from the list to display its details.</p>
 		</div>
 	</div>
 </div>

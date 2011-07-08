@@ -13,4 +13,8 @@ module ApplicationHelper
     number_to_percentage(number, :precision => 0)
   end
   
+  def date date
+    date.strftime("%B %d, %Y")
+  end
+  
 end
