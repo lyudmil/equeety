@@ -1,3 +1,7 @@
+<% content_for(:head) do %>
+<%= javascript_include_tag 'deals' %>
+<% end %>
+
 <div id="main-content" class="span-24 last">
 	<div id="main-content-left" class="span-4 first">
 		<div class="span-4 last line-item first-item heading">MY DEALS</div>
@@ -36,7 +40,7 @@
 		<%= render :partial => "dashboard/fund_status" %>
 		
 		<div class="deal-previews span-14 last">
-			<table>
+			<table id="deals">
 				<thead>
 					<tr>
 						<td>Startup Name</td>
@@ -55,7 +59,7 @@
 							<%= content_tag(:td, deal.commitments.count) %>
 							<%= content_tag(:td, deal.round) %>
 							<%= content_tag(:td, date(deal.closing_date)) %>
-							<%= content_tag(:td, link_to("Details", deal_path(deal), :remote => true))%>
+							<%= content_tag(:td, link_to("Details", deal_path(deal), :remote => true, :class => 'deal-details'))%>
 						</tr>
 					<% end %>
 				</tbody>
