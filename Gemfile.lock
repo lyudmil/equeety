@@ -130,5 +130,5 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   rails (~> 3.0.0)
-  rspec-rails
+  rspec-rails (>= 2.0.1)
   sqlite3-ruby (= 1.2.5)

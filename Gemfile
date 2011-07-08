@@ -10,7 +10,7 @@ gem 'jquery-rails'
 gem 'gravtastic'
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 2.0.1'
   gem 'capybara'
   gem 'autotest'
   gem 'autotest-growl'
