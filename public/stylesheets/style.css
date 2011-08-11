@@ -331,11 +331,29 @@ div.invite-title h2 {
 div.invite-status {
 	margin-top: 7px;
 	background-color: #b9d4dc;
-	padding: 8px;
 	color: white;
 	text-align: center;
+	padding: 8px 0 8px 0;
 }
 
 div.invite-info {
 	margin-top: 15px;
+}
+
+div.light-blue {
+	background-color: #a3ccdb;
+}
+
+div.invite .button {
+	padding: 8px;
+	float: left;
+	width: 40%;
+}
+
+div.invite .reject {
+	margin-left: 5px;
+}
+
+div.invite-controls {
+	margin-top: 20px;
 }

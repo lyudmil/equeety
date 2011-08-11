@@ -1,0 +1,32 @@
+<div class="prepend-1 span-23 last">
+	<% for invite in invitations %>
+		<div class="invite span-5">
+			<div class="invite-title span-5 last">
+				<h2><%= invite.deal.startup_name %></h2>
+			</div>
+		
+			<div class="invite-status span-5 last"><%= invite.deal.status.humanize.capitalize %></div>
+		
+			<div class="invite-info span-5 last">
+				<div class="deal-field span-5 last">
+					<div class="short-label">ROUND</div>
+					<div class="short-value"><%= invite.deal.round %></div>
+				</div>
+				<div class="deal-field span-5 last">
+					<div class="short-label">COMMITMENTS</div>
+					<div class="short-value"><%= invite.deal.commitments.count %></div>
+				</div>
+			</div>
+		
+			<div class="invite-controls button-container span-5 last">
+				<%= link_to invitation_path(invite), :method => :put do %>
+					<div class="light-blue button">Accept</div>
+				<% end %>
+			
+				<%= link_to invitation_path(invite), :method => :delete, :confirm => "Are you sure you want to reject this deal?" do %>
+					<div class="light-blue reject button">Reject</div>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>

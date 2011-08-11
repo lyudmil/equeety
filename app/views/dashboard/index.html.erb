@@ -10,25 +10,8 @@
 			<div class="invites-heading prepend-1 span-23 last">
 				Deals by <strong>Equeety Users</strong>
 			</div>
-			<div class="prepend-1 span-23 last">
-				<div class="invite span-5">
-					<div class="invite-title">
-						<h2>Equeety</h2>
-					</div>
-					<div class="invite-status">New</div>
-					
-					<div class="invite-info">
-						<div class="deal-field">
-							<div class="short-label">ROUND</div>
-							<div class="short-value">Pre-Seed</div>
-						</div>
-						<div class="deal-field">
-							<div class="short-label">COMMITMENTS</div>
-							<div class="short-value">5</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			
+			<%= render :partial => "invite_list", :locals => {:invitations => private_invitations} %>
 		</div>
 	</div>
 </div>
