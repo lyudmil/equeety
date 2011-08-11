@@ -100,7 +100,7 @@ body {
 }
 
 #main-content-middle h2 {
-	margin-bottom: 0;
+	margin-bottom: 0;	
 }
 
 #main-content-middle h3 {
@@ -176,16 +176,17 @@ body {
 	font-size: 1.5em;
 }
 
-#main-content-right .deal-field .short-value {
+.deal-field .short-value {
 	float: left;
 	margin-right: 0.75em;
 	font-size: 1.5em;
 }
 
-#main-content-right .deal-field .short-label {
+.deal-field .short-label {
 	float: left;
 	height: 1em;
 	padding-top: 0.5em;
+	margin-right: 5px;
 }
 
 #main-content-right .section-end {
@@ -291,4 +292,50 @@ tbody tr.selected {
 table td.startup-name {
 	font-size: 1.2em;
 	font-weight: bold;
+}
+
+#tagline {
+	padding-top: 15px;
+	text-align: right;
+}
+
+#tagline h2 {
+	color: #403f3f;
+}
+
+.padded {
+	padding: 30px;
+}
+
+.invites-heading {
+	color: #898989;
+	font-size: 1.5em;
+}
+
+div.invite {
+	margin-top: 15px;
+	padding: 10px;
+	background-color: #f1f1f1;
+	border: 5px solid #cdcfcf;
+}
+
+div.invite-title {
+	height: 6em;
+	border-bottom: 2px solid #e7e7e5;
+}
+
+div.invite-title h2 {
+	color: #009ed0;
+}
+
+div.invite-status {
+	margin-top: 7px;
+	background-color: #b9d4dc;
+	padding: 8px;
+	color: white;
+	text-align: center;
+}
+
+div.invite-info {
+	margin-top: 15px;
 }
