@@ -1,6 +1,6 @@
-<div class="prepend-1 span-23 last">
+<div class="span-24 last">
 	<% for invite in invitations %>
-		<div class="invite span-5">
+		<div class="invite span-5 <%= 'last' if invitations.index(invite) > 0 and (invitations.index(invite) + 1) % 4 == 0 %>">
 			<div class="invite-title span-5 last">
 				<h2><%= invite.deal.startup_name %></h2>
 			</div>

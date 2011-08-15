@@ -13,5 +13,13 @@
 			
 			<%= render :partial => "invite_list", :locals => {:invitations => private_invitations} %>
 		</div>
+		
+		<div class="span-24 last">
+			<div class="invites-heading prepend-1 span-23 last">
+				Deals Through <strong>Your Public Page</strong>
+			</div>
+			
+			<%= render :partial => "invite_list", :locals => {:invitations => public_invitations} %>
+		</div>
 	</div>
 </div>
