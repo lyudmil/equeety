@@ -89,7 +89,7 @@ body {
 }
 
 #main-content-middle {
-	height: 100%;
+	overflow: auto;
 	background-color: #fbfafa;
 	margin-left: -10px;
 	margin-right: 0;
@@ -97,6 +97,10 @@ body {
 	-moz-box-shadow: 0 0 10px #cfcfcf;
 	-webkit-box-shadow: 0 0 10px #cfcfcf;
 	box-shadow: 0 0 10px #cfcfcf;
+}
+
+.full-height {
+	height: 100%;
 }
 
 #main-content-middle h2 {
@@ -310,6 +314,7 @@ table td.startup-name {
 .invites-heading {
 	color: #898989;
 	font-size: 1.5em;
+	margin-top: 15px;
 }
 
 div.invite {
@@ -356,4 +361,8 @@ div.invite .reject {
 
 div.invite-controls {
 	margin-top: 20px;
+}
+
+.clear {
+	clear: both;
 }

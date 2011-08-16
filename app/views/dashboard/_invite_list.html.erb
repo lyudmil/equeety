@@ -9,12 +9,16 @@
 		
 			<div class="invite-info span-5 last">
 				<div class="deal-field span-5 last">
-					<div class="short-label">ROUND</div>
-					<div class="short-value"><%= invite.deal.round %></div>
+					<div class="short-label">REQUIRED AMOUNT</div>
+					<div class="short-value"><%= dollars(invite.deal.required_amount) %></div>
 				</div>
 				<div class="deal-field span-5 last">
-					<div class="short-label">COMMITMENTS</div>
-					<div class="short-value"><%= invite.deal.commitments.count %></div>
+					<div class="short-label">PROPOSED VALUATION</div>
+					<div class="short-value"><%= dollars(invite.deal.proposed_valuation) %></div>
+				</div>
+				<div class="deal-field span-5 last">
+					<div class="short-label">ROUND</div>
+					<div class="short-value"><%= invite.deal.round %></div>
 				</div>
 			</div>
 		
